@@ -1,6 +1,6 @@
 package com.flipkart.bean;
 
-public class Slots {
+public class Slot {
 	
 	private String gymId;
 

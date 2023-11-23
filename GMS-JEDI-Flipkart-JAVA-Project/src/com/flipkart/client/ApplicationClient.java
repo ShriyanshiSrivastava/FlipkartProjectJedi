@@ -9,42 +9,41 @@ public class ApplicationClient {
 	
 	
 	
-	public static void main(String[] args) {
+	public static void mainPage() {
 	    System.out.println("Welcome to FlipFit Application");
-	    System.out.println("Choices:");
-	    System.out.println("1. Login");
-	    System.out.println("2. Registration of Customer");
-	    System.out.println("3. Update Password");
-	    System.out.println("4. Exit");
+
+
 
 	    Scanner sc = new Scanner(System.in);
-	    System.out.println("Enter the username");
-	    String userName = sc.next();
-	    System.out.println("Enter the password");
-	    String password = sc.next();
 	    System.out.println("Enter the role");
 	    String role = sc.next();
 	    if(role.equals("Admin"))
 	    {
-	    	
+
 	          System.out.println("Welcome to Admin Menu");
-	          AdminLogic admin=new AdminLogic();
-	          admin.viewAllGyms();
+	          AdminGMSMenu admin=new AdminGMSMenu();
+	          admin.viewAllGymOwners();
 	    }
 	    else if(role.equals("Customer"))
 	    {
 	       System.out.println("Welcome to Customer Menu");
-	       CustomerLogic customer=new CustomerLogic();
-	       customer.cancelSlot(0);
+			CustomerGMSMenu customer=new CustomerGMSMenu();
+			customer.testingFunction();
+//			customer.CustomerRegistration();
 	    }
-	    else
+	    else if(role.equals("GymOwner"))
 	    {
 	           System.out.println("Welcome GymOwner");
-	           GymOwnerLogic gymOwner = new GymOwnerLogic();
-	           gymOwner.updateSlot();
+			GymGMSMenu gymOwner=new GymGMSMenu();
+			gymOwner.testingGymOwnerMenu();
+//			gymOwner.ViewAllDetails();
 	    }
 	    // TODO Auto-generated method stub
 	    
+	}
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		mainPage();
 	}
 
 }
