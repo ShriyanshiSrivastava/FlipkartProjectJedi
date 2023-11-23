@@ -1,7 +1,11 @@
 package com.flipkart.bean;
 
-public class Centre {
+public class GymCentre {
+	
 	private int gymId;
+	private int centreId;
+	private String locationId;
+	
 	public int getGymId() {
 		return gymId;
 	}
@@ -20,7 +24,4 @@ public class Centre {
 	public void setLocationId(String locationId) {
 		this.locationId = locationId;
 	}
-	private int centreId;
-	private String locationId;
-
 }

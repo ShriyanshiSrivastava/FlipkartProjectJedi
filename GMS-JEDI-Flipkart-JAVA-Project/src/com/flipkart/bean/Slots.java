@@ -3,6 +3,12 @@ package com.flipkart.bean;
 public class Slots {
 	
 	private String gymId;
+
+	private String centreId;
+	private int totalSlots;
+	private String date;
+	private String time;
+	
 	public String getGymId() {
 		return gymId;
 	}
@@ -33,9 +39,5 @@ public class Slots {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	private String centreId;
-	private int totalSlots;
-	private String date;
-	private String time;
 
 }

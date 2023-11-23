@@ -5,9 +5,9 @@ public class GymOwnerLogic {
 		return true;
 	}
 	public void updateSlot() {
-		
+		System.out.println("Slot is updated");
 	}
 	public void registerCustomer() {
-		
+		System.out.println("Customer is registered");
 	}
 }

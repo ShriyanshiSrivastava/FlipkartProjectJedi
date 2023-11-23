@@ -3,6 +3,11 @@ package com.flipkart.bean;
 public class GymOwner {
 	
 	private String name;
+	private String email;
+	private String address;
+	private String aadhar;
+	private String gstNumber;
+
 	public String getName() {
 		return name;
 	}
@@ -33,9 +38,4 @@ public class GymOwner {
 	public void setGstNumber(String gstNumber) {
 		this.gstNumber = gstNumber;
 	}
-	private String email;
-	private String address;
-	private String aadhar;
-	private String gstNumber;
-
 }
