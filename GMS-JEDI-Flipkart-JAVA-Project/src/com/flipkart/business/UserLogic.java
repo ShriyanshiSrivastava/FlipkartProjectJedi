@@ -14,4 +14,8 @@ public class UserLogic {
 	public boolean makePayment() {
 		return true;
 	}
+	public String[] viewMyBookings() {
+		String[] bookings = [];
+		return bookings;
+	}
 }
