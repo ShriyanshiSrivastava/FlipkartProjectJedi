@@ -6,10 +6,8 @@ import com.flipkart.business.CustomerLogic;
 import com.flipkart.business.GymOwnerLogic;
 
 public class ApplicationClient {
-	
-	
-	
-	public static void mainPage() {
+
+	public static void mainPage() throws Exception {
 	    System.out.println("Welcome to FlipFit Application");
 
 
@@ -22,7 +20,8 @@ public class ApplicationClient {
 
 	          System.out.println("Welcome to Admin Menu");
 	          AdminGMSMenu admin=new AdminGMSMenu();
-	          admin.viewAllGymOwners();
+			  admin.AdminPage(sc);
+
 	    }
 	    else if(role.equals("Customer"))
 	    {

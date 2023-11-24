@@ -10,7 +10,7 @@ import com.flipkart.business.UserLogic;
 public class CustomerGMSMenu {
     private CustomerLogic customerLogic = new CustomerLogic();
 
-    public void testingFunction(){
+    public void testingFunction() throws Exception {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter your UserName:");
         String userName = scan.next();
@@ -23,7 +23,7 @@ public class CustomerGMSMenu {
     Customer customer = new Customer();
 
 
-    public void customerRegistration(Scanner sc) {
+    public void customerRegistration(Scanner sc) throws Exception {
         System.out.println("Enter your name: ");
         customer.setName(sc.next());
 
@@ -57,7 +57,7 @@ public class CustomerGMSMenu {
 
     }
 
-    public void customerPage(Scanner sc, String customerEmail) {
+    public void customerPage(Scanner sc, String customerEmail) throws Exception {
 
         while(true) {
             System.out.println("1. Book slot");
@@ -82,12 +82,5 @@ public class CustomerGMSMenu {
                     System.out.println("Incorrect choice");
             }
         }
-
-
     }
-
-
-
-
-
 }

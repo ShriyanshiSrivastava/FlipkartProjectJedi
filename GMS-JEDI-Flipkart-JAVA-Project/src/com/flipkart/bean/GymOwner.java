@@ -5,6 +5,11 @@ public class GymOwner {
 	private String name;
 	private String email;
 	private String address;
+
+	public String getAadhar() {
+		return aadhar;
+	}
+
 	private String aadhar;
 	private String gstNumber;
 	private boolean isApproved;

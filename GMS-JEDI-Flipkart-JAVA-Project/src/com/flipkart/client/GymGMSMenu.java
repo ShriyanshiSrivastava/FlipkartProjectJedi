@@ -81,7 +81,7 @@ public class GymGMSMenu {
         System.out.println("-------------------------------------");
     }
 
-    public void addSlots(Scanner sc, String gymOwnerEmail) {
+    public void addSlots(Scanner sc, String gymOwnerEmail) throws Exception {
         getAllGymDetails();
         System.out.println("Enter the gymCenter id for which you want to add slots: ");
         gymCenter.setGymId(sc.nextInt());
@@ -99,7 +99,7 @@ public class GymGMSMenu {
         }
     }
 
-    public void gymOwnerPage(Scanner sc,String gymOwnerEmail) {
+    public void gymOwnerPage(Scanner sc,String gymOwnerEmail) throws Exception {
         if(!gymOwnerBusiness.isApproved(gymOwnerEmail)) {
             System.out.println("You are not a Authorized Gym Owner");
             ApplicationClient.mainPage();
