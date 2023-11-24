@@ -18,10 +18,8 @@ public class GymGMSMenu {
 
     GymOwnerLogic gymOwnerBusiness = new GymOwnerLogic();
 
-    public void registerGymOwner(Scanner sc){
-
-        System.out.println("Enter your email: ");
-        gymOwner.setEmail(sc.next());
+    public void registerGymOwner(Scanner sc, String email){
+        gymOwner.setEmail(email);
 
         System.out.println("Enter your name: ");
         gymOwner.setName(sc.next());
@@ -47,18 +45,7 @@ public class GymGMSMenu {
     }
 
     public void registerGym(Scanner sc) {
-        GymCentre gymCenter = new GymCentre();
-        System.out.println("Add gym Details: ");
-        System.out.print("Add GymCenter id: ");
-
-        gymCenter.setGymId(sc.nextInt());
-        System.out.print("Enter gym location: ");
-        gymCenter.setLocationId(sc.next());
-        System.out.println("Enter the number of seats: ");
-        gymCenter.setNoOfSeats(sc.nextInt());
-       // gymCenter.setGymOwnerEmail(gymOwner.getEmail());
-
-        gymOwnerBusiness.addGym(gymCenter);
+        gymOwnerBusiness.addGym(sc, gymCenter);
     }
 
     public void getAllGymDetails() {
@@ -82,35 +69,49 @@ public class GymGMSMenu {
     }
 
     public void addSlots(Scanner sc, String gymOwnerEmail) throws Exception {
-        getAllGymDetails();
+//        getAllGymDetails();
+//        System.out.println("Enter the gymCenter id for which you want to add slots: ");
+//        gymCenter.setGymId(sc.nextInt());
+//        if(!gymCenter.isApproved()){
+//            System.out.println("This Gym is not Authorized");
+//            gymOwnerPage(sc, gymOwnerEmail);
+//        }
         System.out.println("Enter the gymCenter id for which you want to add slots: ");
         gymCenter.setGymId(sc.nextInt());
-        if(!gymCenter.isApproved()){
-            System.out.println("This Gym is not Authorized");
-            gymOwnerPage(sc, gymOwnerEmail);
-        }
-        else {
             System.out.println("Add slot timing: ");
             Slot slot = new Slot();
             slot.setTime(sc.next());
+        System.out.println("Add slot date: ");
             String date = sc.next();
+            slot.setDate(date);
             gymOwnerBusiness.addSlots(gymCenter.getGymId(),date,slot);
             gymOwnerPage(sc, gymOwnerEmail);
+
+    }
+
+    private void viewSlots(int gymCentreId) {
+        List<Slot> slots = gymOwnerBusiness.viewAllSlots(gymCentreId);
+        System.out.println("Date \t\t\t Time ");
+        for (Slot slot : slots) {
+            System.out.printf("%-8s\t", slot.getDate());
+            System.out.printf("%-8s\t", slot.getTime());
+            System.out.println("");
         }
+        System.out.println("**********************************");
     }
 
     public void gymOwnerPage(Scanner sc,String gymOwnerEmail) throws Exception {
-        if(!gymOwnerBusiness.isApproved(gymOwnerEmail)) {
+        if (!gymOwnerBusiness.isApproved(gymOwnerEmail)) {
             System.out.println("You are not a Authorized Gym Owner");
             ApplicationClient.mainPage();
-        }
-        else {
+        } else {
             gymOwner.setEmail(gymOwnerEmail);
-            while(true) {
+            while (true) {
                 System.out.println("1. Add Gyms");
                 System.out.println("2. View Gyms");
                 System.out.println("3. Add Slots");
-                System.out.println("4. Exit");
+                System.out.println("4. View Slots");
+                System.out.println("5. Exit");
                 System.out.print("Enter your choice: ");
                 int choice = sc.nextInt();
                 switch (choice) {
@@ -122,7 +123,13 @@ public class GymGMSMenu {
                         break;
                     case 3:
                         addSlots(sc, gymOwnerEmail);
+                        break;
                     case 4:
+                        System.out.println("Enter the gymId for which you want to view the slots");
+                        int id = sc.nextInt();
+                        viewSlots(id);
+                        break;
+                    case 5:
                         ApplicationClient.mainPage();
                         break;
                     default:

@@ -52,9 +52,30 @@ public class ApplicationClient {
 	    }
 	    else if(role.equals("GymOwner"))
 	    {
-			System.out.println("Welcome GymOwner");
+			System.out.println("1. Register");
+			System.out.println("2. Login");
+			System.out.println("3. Exit");
+			System.out.print("Enter your choice: ");
+			int choice = sc.nextInt();
 			GymGMSMenu gymOwner=new GymGMSMenu();
-			gymOwner.testingGymOwnerMenu();
+			System.out.println("Enter your email: ");
+			String email = sc.next();
+			switch (choice) {
+				case 1:
+					gymOwner.registerGymOwner(sc, email);
+					gymOwner.gymOwnerPage(sc, email);
+					break;
+				case 2:
+					gymOwner.gymOwnerPage(sc, email);
+					break;
+				case 3:
+					ApplicationClient.mainPage();
+					break;
+				default:
+					System.out.println("Incorrect choice");
+			}
+//
+//			gymOwner.testingGymOwnerMenu();
 //			gymOwner.ViewAllDetails();
 	    }
 	    // TODO Auto-generated method stub
