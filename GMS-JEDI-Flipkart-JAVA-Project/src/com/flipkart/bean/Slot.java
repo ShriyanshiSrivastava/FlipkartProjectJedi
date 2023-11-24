@@ -1,14 +1,34 @@
 package com.flipkart.bean;
 
 public class Slot {
-	
+
 	private String gymId;
+	private int slotId;
+
+	public int getSlotId()
+	{
+		return slotId;
+	}
+	public void setSlotId(int slotId)
+	{
+		this.slotId = slotId;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+
+	private int customerId;
 
 	private String centreId;
 	private int totalSlots;
 	private String date;
 	private String time;
-	
+
 	public String getGymId() {
 		return gymId;
 	}

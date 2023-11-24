@@ -9,21 +9,30 @@ import com.flipkart.business.UserLogic;
 
 public class CustomerGMSMenu {
     private CustomerLogic customerLogic = new CustomerLogic();
+    int customerId;
 
-    public void testingFunction() throws Exception {
+    public void testingFunction(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter your UserName:");
         String userName = scan.next();
         System.out.println("Enter your Password:");
         String password = scan.next();
-        customerLogic.login(userName,password);
-        customerPage(scan, customer.getEmail());
+
+        customerId =  customerLogic.login(userName,password);
+
+        if(customerId!=-1)
+        {
+            customerPage(scan);
+        }
+
+
+
     }
     CustomerLogic customerBusiness = new CustomerLogic();
     Customer customer = new Customer();
 
 
-    public void customerRegistration(Scanner sc) throws Exception {
+    public void customerRegistration(Scanner sc) {
         System.out.println("Enter your name: ");
         customer.setName(sc.next());
 
@@ -38,26 +47,31 @@ public class CustomerGMSMenu {
         user.setEmail(customer.getEmail());
         user.setRoleId(3);
         UserLogic userBusiness = new UserLogic();
-//		UserBusiness.registerUser(user);
-//		UserBusiness.registerCustomer(customer);
-        System.out.println("You are successfully registered");
-        Scanner scan = new Scanner(System.in);
-        customerPage(scan, customer.getEmail());
+        // UserBusiness.registerUser(user);
+        //UserBusiness.registerCustomer(customer);
     }
 
-    public void bookSlot(Scanner sc,String customerEmail) {
-
-    }
-
-    public void cancelBookedSlot(String customerEmail) {
+    public void bookSlot(Scanner sc,int customerId) {
+        customerLogic.bookSlot(sc,customerId);
 
     }
 
-    public void viewAllBookedSlots(String customerEmail) {
+    public void cancelBookedSlot(Scanner sc) {
+        System.out.println("Enter Slot Id");
+        int slotId = sc.nextInt();
+        System.out.println("Enter Date");
+        String date = sc.next();
+        customerLogic.cancelSlot(slotId,customerId,date);
+        customerPage(sc);
 
     }
 
-    public void customerPage(Scanner sc, String customerEmail) throws Exception {
+    public void viewAllBookedSlots(Scanner sc ,int customerId) {
+        customerLogic.viewAllBookings(customerId);
+        customerPage(sc);
+    }
+
+    public void customerPage(Scanner sc) {
 
         while(true) {
             System.out.println("1. Book slot");
@@ -68,13 +82,13 @@ public class CustomerGMSMenu {
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
-                    bookSlot(sc,customerEmail);
+                    bookSlot(sc,customerId);
                     break;
                 case 2:
-                    cancelBookedSlot(customerEmail);
+                    cancelBookedSlot( sc);
                     break;
                 case 3:
-                    viewAllBookedSlots(customerEmail);
+                    viewAllBookedSlots(sc,customerId);
                 case 4:
                     ApplicationClient.mainPage();
                     break;
@@ -82,5 +96,7 @@ public class CustomerGMSMenu {
                     System.out.println("Incorrect choice");
             }
         }
+
+
     }
 }

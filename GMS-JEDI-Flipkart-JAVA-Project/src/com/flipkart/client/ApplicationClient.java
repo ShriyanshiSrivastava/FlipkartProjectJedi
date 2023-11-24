@@ -7,7 +7,7 @@ import com.flipkart.business.GymOwnerLogic;
 
 public class ApplicationClient {
 
-	public static void mainPage() throws Exception {
+	public static void mainPage() {
 	    System.out.println("Welcome to FlipFit Application");
 
 

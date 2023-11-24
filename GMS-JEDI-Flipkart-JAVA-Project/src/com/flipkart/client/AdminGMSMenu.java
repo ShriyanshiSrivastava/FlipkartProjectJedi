@@ -116,7 +116,7 @@ public class AdminGMSMenu {
         System.out.println("**********************************");
     }
 
-    public void AdminPage(Scanner in) throws Exception {
+    public void AdminPage(Scanner in)  {
         while(true) {
             System.out.println("1. View All Gym Owners");
             System.out.println("2. View All Pending Gym Owners");

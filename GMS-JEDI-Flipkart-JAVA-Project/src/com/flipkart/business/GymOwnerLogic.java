@@ -61,7 +61,7 @@ public class GymOwnerLogic {
 		gymCenter.setLocationId(sc.next());
 		System.out.println("Enter the number of seats: ");
 		gymCenter.setNoOfSeats(sc.nextInt());
-		System.out.println("Slot added successfully");
+		System.out.println("Gym added successfully");
 		allGyms.add(gymCenter);
 	}
 	public boolean isApproved(String gymOwnerEmail) {
@@ -75,6 +75,8 @@ public class GymOwnerLogic {
 	}
 	public List<GymCentre> viewAllGymCenters(String gymOwnerEmail){
 		System.out.println("Listing all Gym Centres");
+		System.out.printf("%5s %10s %8s %10s", "CenterId","Location", "Seats", "Approved");
+		System.out.println();
 		return allGyms;
 	}
 }
