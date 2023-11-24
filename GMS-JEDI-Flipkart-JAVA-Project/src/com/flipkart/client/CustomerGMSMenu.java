@@ -16,10 +16,8 @@ public class CustomerGMSMenu {
         String userName = scan.next();
         System.out.println("Enter your Password:");
         String password = scan.next();
-
         customerLogic.login(userName,password);
-
-
+        customerPage(scan, customer.getEmail());
     }
     CustomerLogic customerBusiness = new CustomerLogic();
     Customer customer = new Customer();
@@ -42,6 +40,9 @@ public class CustomerGMSMenu {
         UserLogic userBusiness = new UserLogic();
 //		UserBusiness.registerUser(user);
 //		UserBusiness.registerCustomer(customer);
+        System.out.println("You are successfully registered");
+        Scanner scan = new Scanner(System.in);
+        customerPage(scan, customer.getEmail());
     }
 
     public void bookSlot(Scanner sc,String customerEmail) {

@@ -28,12 +28,32 @@ public class ApplicationClient {
 	    {
 	       System.out.println("Welcome to Customer Menu");
 			CustomerGMSMenu customer=new CustomerGMSMenu();
-			customer.testingFunction();
+			//while(true){
+				System.out.println("1. Register");
+				System.out.println("2. Login");
+				System.out.println("3. Exit");
+				System.out.print("Enter your choice: ");
+				int choice = sc.nextInt();
+				switch (choice) {
+					case 1:
+						customer.customerRegistration(sc);
+						break;
+					case 2:
+						customer.testingFunction();
+						break;
+					case 3:
+						ApplicationClient.mainPage();
+						break;
+					default:
+						System.out.println("Incorrect choice");
+				}
+			//}
+//			customer.testingFunction();
 //			customer.CustomerRegistration();
 	    }
 	    else if(role.equals("GymOwner"))
 	    {
-	           System.out.println("Welcome GymOwner");
+			System.out.println("Welcome GymOwner");
 			GymGMSMenu gymOwner=new GymGMSMenu();
 			gymOwner.testingGymOwnerMenu();
 //			gymOwner.ViewAllDetails();
