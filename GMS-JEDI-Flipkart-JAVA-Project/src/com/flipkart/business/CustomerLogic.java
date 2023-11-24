@@ -1,5 +1,6 @@
 package com.flipkart.business;
 
+import com.flipkart.DAO.CustomerDAO;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
@@ -8,9 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerLogic {
-	public Customer getCustomerDetails(int customerId) {
-		return new Customer();
+
+	private List<Customer> customerCollection = new CustomerDAO().getCustomerList();
+
+	public boolean login(String userName, String password){
+		for(Customer c: customerCollection){
+			if(c.getName().equals(userName) && c.getPassword().equals(password)){
+				System.out.println("Login Successful");
+				return true;
+			}
+		}
+		System.out.println("Login Failed Wrong Credentials");
+		return false;
 	}
+
+//	public Customer getCustomerDetails(int customerId) {
+//		return new Customer();
+//	}
 
 	public List<GymCentre> viewAllGymCentres() {
 		System.out.println("Listing all Gym Centers");

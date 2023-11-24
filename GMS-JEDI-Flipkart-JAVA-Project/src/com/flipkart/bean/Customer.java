@@ -3,11 +3,23 @@ package com.flipkart.bean;
 public class Customer {
 
     private int id;
+    private String password;
     private int cardNumber;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     private String name;
     private String address;
     private int cvv;
     private String email;
+
+
 
     public int getCardNumber() {
         return cardNumber;

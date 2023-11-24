@@ -8,9 +8,18 @@ import com.flipkart.business.UserLogic;
 
 
 public class CustomerGMSMenu {
+    private CustomerLogic customerLogic = new CustomerLogic();
 
     public void testingFunction(){
-        System.out.println(" Customer Logic is showing fine");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter your UserName:");
+        String userName = scan.next();
+        System.out.println("Enter your Password:");
+        String password = scan.next();
+
+        customerLogic.login(userName,password);
+
+
     }
     CustomerLogic customerBusiness = new CustomerLogic();
     Customer customer = new Customer();
