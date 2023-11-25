@@ -1,36 +1,35 @@
 package com.flipkart.bean;
 
-import java.util.List;
-
 public class Admin {
 	
-	private String id;
-	private List<String> slots;
-	private List<String> users;
+	private String name;
+	private String email;
+	private String phoneNumber;
 
-	public String getId() {
-		return id;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public List<String> getSlots() {
-		return slots;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setSlots(List<String> slots) {
-		this.slots = slots;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public List<String> getUsers() {
-		return users;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsers(List<String> users) {
-		this.users = users;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 	
 
 }
