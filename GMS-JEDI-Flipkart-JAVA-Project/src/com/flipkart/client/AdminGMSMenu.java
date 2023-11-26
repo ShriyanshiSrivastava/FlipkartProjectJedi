@@ -99,10 +99,10 @@ public class AdminGMSMenu {
 
         System.out.println("Email \t\t\t Name \t\t AadhaarNumber \t GSTNumber \tApproved ");
         for(GymOwner owner: gymOwnerDetails) {
-            System.out.printf("%-5s\t", owner.getEmail());
+            System.out.printf("%-8s\t", owner.getEmail());
             System.out.printf("%-8s\t", owner.getName());
-            System.out.printf("%-8s\t", owner.getAadhar());
-            System.out.printf("%-8s\t", owner.getGstNumber());
+            System.out.printf("%-5s\t", owner.getAadhar());
+            System.out.printf("%-5s\t", owner.getGstNumber());
             if(owner.isApproved())
             {
                 System.out.printf("%-8s\t", "Yes");

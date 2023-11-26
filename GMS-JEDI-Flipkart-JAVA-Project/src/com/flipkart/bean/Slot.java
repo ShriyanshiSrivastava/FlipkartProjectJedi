@@ -2,14 +2,12 @@ package com.flipkart.bean;
 
 public class Slot {
 	private String gymId;
-	private int slotId;
+	private static int slotId;
 	private int customerId;
-	private String centreId;
-	private int totalSlots;
 	private String date;
-	private String time;
+	private static String time;
 
-	public int getSlotId()
+	public static int getSlotId()
 	{
 		return slotId;
 	}
@@ -26,24 +24,11 @@ public class Slot {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-
 	public String getGymId() {
 		return gymId;
 	}
 	public void setGymId(String gymId) {
 		this.gymId = gymId;
-	}
-	public String getCentreId() {
-		return centreId;
-	}
-	public void setCentreId(String centreId) {
-		this.centreId = centreId;
-	}
-	public int getTotalSlots() {
-		return totalSlots;
-	}
-	public void setTotalSlots(int totalSlots) {
-		this.totalSlots = totalSlots;
 	}
 	public String getDate() {
 		return date;
@@ -51,7 +36,7 @@ public class Slot {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getTime() {
+	public static String getTime() {
 		return time;
 	}
 	public void setTime(String time) {

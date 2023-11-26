@@ -1,5 +1,6 @@
 package com.flipkart.business;
 
+import com.flipkart.DAO.UserDAO;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
@@ -11,7 +12,8 @@ public class UserLogic {
 
 
     public void registerGymOwner(GymOwner gymOwner) {
-        System.out.println("GymOwner registered");
+        //System.out.println("GymOwner registered");
+        UserDAO.registerGymOwner(gymOwner);
     }
 
     public void login(User user) {

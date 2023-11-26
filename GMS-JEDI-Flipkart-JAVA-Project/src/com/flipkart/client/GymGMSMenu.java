@@ -9,6 +9,8 @@ import com.flipkart.business.UserLogic;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.flipkart.DAO.GymOwnerDAO.viewAllSlots;
+
 public class GymGMSMenu {
     public void testingGymOwnerMenu() {
         System.out.println("Gym owner menu is running fine");
@@ -44,15 +46,34 @@ public class GymGMSMenu {
         userLogic.registerGymOwner(gymOwner);
     }
 
-    public void registerGym(Scanner sc) {
-        gymOwnerBusiness.addGym(sc, gymCenter);
+    public void registerGym(Scanner in) {
+        //gymOwnerBusiness.addGym(gymCenter);
+        GymCentre gymDetails = new GymCentre();
+        System.out.println("Add gym Details:-");
+        System.out.print("Add gymnasium name: ");
+        gymDetails.setName(in.next());
+        System.out.print("Enter the number of equipments: ");
+        gymDetails.setNumItem(in.nextInt());
+        System.out.print("Enter gymnasium address: ");
+        gymDetails.setAddress(in.next());
+//        System.out.print("Add gymnasium area in square foot: ");
+//        gymDetails.s(in.nextDouble());
+        System.out.println("Enter the number of seats per slot: ");
+        gymDetails.setNoOfSeats(in.nextInt());
+//		System.out.println(gymOwner.getOwnerId());
+        gymDetails.setGymOwnerEmail(gymOwner.getEmail());
+//		System.out.println(gymDetails);
+
+        gymOwnerBusiness.addGym(gymDetails);
+
+        System.out.flush();
     }
 
-    public void getAllGymDetails() {
+    public void getAllGymDetails(Scanner in) {
         List<GymCentre> allGyms = gymOwnerBusiness.viewAllGymCenters(gymOwner.getEmail());
         for(GymCentre gym : allGyms) {
             System.out.printf("%-8s\t", gym.getGymId());
-            System.out.printf("%-8s\t", gym.getLocationId());
+            //System.out.printf("%-8s\t", gym.getLocationId());
             System.out.printf("%-8s\t", gym.getNoOfSeat());
 
             if(gym.isApproved())
@@ -68,32 +89,54 @@ public class GymGMSMenu {
         System.out.println("-------------------------------------");
     }
 
-    public void addSlots(Scanner sc, String gymOwnerEmail){
-//        getAllGymDetails();
-//        System.out.println("Enter the gymCenter id for which you want to add slots: ");
-//        gymCenter.setGymId(sc.nextInt());
-//        if(!gymCenter.isApproved()){
-//            System.out.println("This Gym is not Authorized");
-//            gymOwnerPage(sc, gymOwnerEmail);
-//        }
-        System.out.println("Enter the gymCenter id for which you want to add slots: ");
-        gymCenter.setGymId(sc.nextInt());
-            System.out.println("Add slot timing: ");
-            Slot slot = new Slot();
-            slot.setTime(sc.next());
-        System.out.println("Add slot date: ");
-            String date = sc.next();
-            slot.setDate(date);
-            gymOwnerBusiness.addSlots(gymCenter.getGymId(),date,slot);
-            gymOwnerPage(sc, gymOwnerEmail);
+    public void addSlots(Scanner in, String email){
 
+        getAllGymDetails(in);
+        System.out.println("Enter the gym id for which you want to add slots: ");
+        int gymId = in.nextInt();
+        boolean check = GymOwnerLogic.checkGymApproval(gymId);
+        if(check == false)
+        {
+            System.out.println("This gym has not been approved yet");
+            gymOwnerPage(in, email);
+            return;
+        }
+            System.out.println("Select which slots you want to add in space separated numbers: \n");
+            List<Slot> slotInfo = gymOwnerBusiness.viewAllSlots();
+            for(Slot slot: slotInfo) {
+                System.out.println(slot.getSlotId() + " " + slot.getTime());
+            }
+            String chosenSlots = in.next();
+            gymOwnerBusiness.addSlots(gymId,chosenSlots);
+            gymOwnerPage(in, email);
+
+
+//        getAllGymDetails(in);
+//        System.out.println("Enter the gymCenter id for which you want to add slots: ");
+//        gymCenter.setGymId(in.nextInt());
+//        if(!gymOwnerBusiness.isApproved(email)){
+//            System.out.println("This Gym is not Authorized");
+////			System.out.println("This Gym is not Authorized");
+//            gymOwnerPage(in, email);
+//        }
+//        else {
+//            viewAllSlots();
+//            System.out.println("Add slot timing: ");
+//
+//            Slot slot = new Slot();
+//            slot.setTime(in.next());
+//            System.out.println("Add slot Id: ");
+//            slot.setSlotId(in.nextInt());
+//            gymOwnerBusiness.addSlots(gymCenter.getGymId(), slot.getTime());
+//            gymOwnerBusiness.addSlots(gymCenter.getGymId(), slot.getTime());
+//            gymOwnerPage(in, email);
+//        }
     }
 
     private void viewSlots(int gymCentreId) {
-        List<Slot> slots = gymOwnerBusiness.viewAllSlots(gymCentreId);
-        System.out.println("Date \t\t\t Time ");
+        List<Slot> slots = gymOwnerBusiness.viewAllSlots();
+        System.out.println("Time ");
         for (Slot slot : slots) {
-            System.out.printf("%-8s\t", slot.getDate());
             System.out.printf("%-8s\t", slot.getTime());
             System.out.println("");
         }
@@ -119,7 +162,7 @@ public class GymGMSMenu {
                         registerGym(sc);
                         break;
                     case 2:
-                        getAllGymDetails();
+                        getAllGymDetails(sc);
                         break;
                     case 3:
                         addSlots(sc, gymOwnerEmail);

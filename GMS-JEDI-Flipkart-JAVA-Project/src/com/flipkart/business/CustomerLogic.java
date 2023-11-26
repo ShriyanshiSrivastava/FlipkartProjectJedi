@@ -45,7 +45,7 @@ public class CustomerLogic {
 		System.out.println("Enter your GymId:");
 		String gymId = sc.next();
 		System.out.println("Enter your slotId:");
-		int slotId = sc.nextInt();
+		int slotId = Integer.parseInt(String.valueOf(sc.nextInt()));
 		System.out.println("Enter your date:");
 		String date = sc.next();
 		System.out.println("Enter time for slot");
@@ -60,8 +60,6 @@ public class CustomerLogic {
 		bookedSlot.setGymId(gymId);
 		bookedSlot.setDate(date);
 		bookedSlot.setTime(time);
-		bookedSlot.setSlotId(slotId);
-		bookedSlot.setCustomerId(customerId);
 		slotsList.add(bookedSlot);
 
 		System.out.println("Slot booked");

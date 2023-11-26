@@ -16,6 +16,7 @@ public class DBConnection {
             return connection;
         else {
             try {
+                System.out.println("first con");
                 Properties prop = new Properties();
                 InputStream inputStream = DBConnection.class.getClassLoader().getResourceAsStream("./config.properties");
                 prop.load(inputStream);
