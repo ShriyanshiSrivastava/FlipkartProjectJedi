@@ -2,13 +2,13 @@ package com.flipkart.client;
 
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.business.AdminLogic;
+import com.flipkart.business.AdminLogicImpl;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class AdminGMSMenu {
-    AdminLogic adminBusiness = new AdminLogic();
+    AdminLogicImpl adminBusiness = new AdminLogicImpl();
 
     public void approveGymCentre(Scanner in) {
         // TODO Auto-generated method stub
@@ -77,6 +77,7 @@ public class AdminGMSMenu {
 
         System.out.println("Gym Id \t Name \tAddress \tApproved ");
         for(GymCentre gym: gymDetails) {
+            System.out.println("Cheeku");
             System.out.printf("%-5s\t", gym.getGymId());
             System.out.printf("%-8s\t", gym.getName());
             System.out.printf("%-8s\t", gym.getAddress());
@@ -99,6 +100,7 @@ public class AdminGMSMenu {
 
         System.out.println("Email \t\t\t Name \t\t AadhaarNumber \t GSTNumber \tApproved ");
         for(GymOwner owner: gymOwnerDetails) {
+            System.out.println("Kismish");
             System.out.printf("%-8s\t", owner.getEmail());
             System.out.printf("%-8s\t", owner.getName());
             System.out.printf("%-5s\t", owner.getAadhar());
@@ -116,7 +118,7 @@ public class AdminGMSMenu {
         System.out.println("**********************************");
     }
 
-    public void AdminPage(Scanner in)  {
+    public void AdminPage(Scanner in) throws Exception {
         while(true) {
             System.out.println("1. View All Gym Owners");
             System.out.println("2. View All Pending Gym Owners");

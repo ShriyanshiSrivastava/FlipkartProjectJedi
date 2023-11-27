@@ -19,7 +19,7 @@ public class SQLConstants {
     public static final String SQL_ALL_SLOTS="INSERT INTO Slot values(?, ?, ?, ?, ?)";
     public static final String INSERT_SLOT = "INSERT INTO Slot (gymId, slotId, time) values(?, ?, ?)";
     public static final String CREATE_SLOT = "INSERT INTO Slot (slotId, time) values(?, ?)";
-    public static final String SQL_INSERT_CUSTOMER_DETAILS_QUERY="INSERT INTO Customer values(?, ?, ?, ?, ?)";
+    public static final String SQL_INSERT_CUSTOMER_DETAILS_QUERY="INSERT INTO Customer (email, name, address, password) values(?, ?, ?, ?)";
     public static final String SQL_FETCH_GYM_SLOT_QUERY = "Select * From Slot Where gymId=?";
     public static final String SQL_FIND_CAPACITY="SELECT * FROM GymCentre WHERE gymId=?";
     public static final String SQL_COUNT_CURRENT_CAPACITY_QUERY = "Select Count(*) From BookedSlot Where slotId=? AND date=?";
@@ -30,7 +30,7 @@ public class SQLConstants {
     public static final String SQL_CANCEL_BOOKED_SLOT_QUERY = "Delete from BookedSlot where customerEmail = ? and slotId = ? and date = ?";
     public static final String SQL_CHECK_SLOT_QUERY = "Select * from Slot where slotId = ? and gymId= ?";
     public static final String SQL_FETCH_ALL_APPROVED_GYMS = "SELECT * FROM GymCentre WHERE isApproved=1";
-    public static final String SQL_CANCEL_BOOKING = "Delete from BookedSlot where BookingId = ?";
+    public static final String SQL_CANCEL_BOOKING = "Delete from BookedSlot where bookingId = ?";
     public static final String SQL_CHECK_GYM_APPROVE = "Select * from GymCentre where gymId=? and isApproved=1";
     public static final String SQL_CHECK_OWNER_APPROVE = "Select * from GymOwner where email=? and isApproved=1";
     public static final String SQL_CHECK_SLOT_FOR_GYM = "SELECT * FROM Slot WHERE gymId=?";

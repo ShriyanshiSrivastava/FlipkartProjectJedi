@@ -1,6 +1,12 @@
 package com.flipkart.bean;
 
 public class User {
+
+	public User (String email,String password,int roleId) {
+		this.email=email;
+		this.password=password;
+		this.roleId=roleId;
+	}
 	
 	private int roleId;
 	private String email;

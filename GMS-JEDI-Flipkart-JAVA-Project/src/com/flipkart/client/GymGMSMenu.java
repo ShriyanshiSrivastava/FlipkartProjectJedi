@@ -1,15 +1,15 @@
 package com.flipkart.client;
+import com.flipkart.DAO.GymOwnerDAOImpl;
+import com.flipkart.DAO.GymOwnerDAO;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slot;
 import com.flipkart.bean.User;
-import com.flipkart.business.GymOwnerLogic;
-import com.flipkart.business.UserLogic;
+import com.flipkart.business.GymOwnerLogicImpl;
+import com.flipkart.business.UserLogicImpl;
 
 import java.util.List;
 import java.util.Scanner;
-
-import static com.flipkart.DAO.GymOwnerDAO.viewAllSlots;
 
 public class GymGMSMenu {
     public void testingGymOwnerMenu() {
@@ -17,8 +17,9 @@ public class GymGMSMenu {
     }
     GymOwner gymOwner = new GymOwner();
     GymCentre gymCenter = new GymCentre();
+    GymOwnerDAO gymOwnerDAO =new GymOwnerDAOImpl();
 
-    GymOwnerLogic gymOwnerBusiness = new GymOwnerLogic();
+    GymOwnerLogicImpl gymOwnerBusiness = new GymOwnerLogicImpl();
 
     public void registerGymOwner(Scanner sc, String email){
         gymOwner.setEmail(email);
@@ -37,13 +38,13 @@ public class GymGMSMenu {
         System.out.println("Enter your password: ");
         String password = sc.next();
 
-        User user = new User();
+        User user = new User(gymOwner.getEmail(), password, 2);
         user.setEmail(gymOwner.getEmail());
         user.setPassword(password);
         user.setRoleId(2);
 
-        UserLogic userLogic = new UserLogic();
-        userLogic.registerGymOwner(gymOwner);
+        UserLogicImpl userLogicImpl = new UserLogicImpl();
+        userLogicImpl.registerGymOwner(gymOwner);
     }
 
     public void registerGym(Scanner in) {
@@ -89,12 +90,12 @@ public class GymGMSMenu {
         System.out.println("-------------------------------------");
     }
 
-    public void addSlots(Scanner in, String email){
+    public void addSlots(Scanner in, String email) throws Exception {
 
         getAllGymDetails(in);
         System.out.println("Enter the gym id for which you want to add slots: ");
         int gymId = in.nextInt();
-        boolean check = GymOwnerLogic.checkGymApproval(gymId);
+        boolean check = gymOwnerDAO.checkGymApproval(gymId);
         if(check == false)
         {
             System.out.println("This gym has not been approved yet");
@@ -137,13 +138,14 @@ public class GymGMSMenu {
         List<Slot> slots = gymOwnerBusiness.viewAllSlots();
         System.out.println("Time ");
         for (Slot slot : slots) {
+            System.out.println("HUFFF");
             System.out.printf("%-8s\t", slot.getTime());
             System.out.println("");
         }
         System.out.println("**********************************");
     }
 
-    public void gymOwnerPage(Scanner sc,String gymOwnerEmail) {
+    public void gymOwnerPage(Scanner sc,String gymOwnerEmail) throws Exception {
         if (!gymOwnerBusiness.isApproved(gymOwnerEmail)) {
             System.out.println("You are not a Authorized Gym Owner");
             ApplicationClient.mainPage();

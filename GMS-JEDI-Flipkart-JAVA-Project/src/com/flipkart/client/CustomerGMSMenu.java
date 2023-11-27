@@ -1,102 +1,153 @@
 package com.flipkart.client;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.bean.*;
-import com.flipkart.business.CustomerLogic;
-import com.flipkart.business.UserLogic;
+import com.flipkart.business.CustomerLogicImpl;
+import com.flipkart.business.UserLogicImpl;
 
 
 public class CustomerGMSMenu {
-    private CustomerLogic customerLogic = new CustomerLogic();
-    int customerId;
-
-    public void testingFunction(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter your UserName:");
-        String userName = scan.next();
-        System.out.println("Enter your Password:");
-        String password = scan.next();
-
-        customerId =  customerLogic.login(userName,password);
-
-        if(customerId!=-1)
-        {
-            customerPage(scan);
-        }
-
-
-
-    }
-    CustomerLogic customerBusiness = new CustomerLogic();
     Customer customer = new Customer();
+    CustomerLogicImpl customerGMSService = new CustomerLogicImpl();
 
-
-    public void customerRegistration(Scanner sc) {
+    public void CustomerRegistration(Scanner in) throws Exception {
         System.out.println("Enter your name: ");
-        customer.setName(sc.next());
-
+        String name = in.next();
+        customer.setName(name);
+        System.out.println(name +" -> "+customer.getName());
+        //System.out.println("Enter your mobile: ");
+//        customer.setMobile(in.next());
         System.out.println("Enter your email: ");
-        customer.setEmail(sc.next());
+        String email = in.next();
+        customer.setEmail(email);
+        System.out.println(email +" -> "+customer.getEmail());
+
         System.out.println("Enter your address: ");
-        customer.setAddress(sc.next());
+        String address = in.next();
+        customer.setAddress(address);
+        System.out.println(address);
+//        System.out.println("Enter your dob: ");
+//        customer.setDob(in.next());
         System.out.println("Enter your password: ");
-        String password = sc.next();
-        User user = new User();
-        user.setPassword(password);
-        user.setEmail(customer.getEmail());
-        user.setRoleId(3);
-        UserLogic userBusiness = new UserLogic();
-        // UserBusiness.registerUser(user);
-        //UserBusiness.registerCustomer(customer);
+        String password = in.next();
+        customer.setPassword(password);
+        System.out.println(password);
+
+        User user = new User(customer.getEmail(),password,1);
+        UserLogicImpl userService = new UserLogicImpl();
+        userService.registerUser(user);
+        userService.registerCustomer(customer);
+//     CustomerActionPage(in, customer.getEmail());
+        CustomerActionPage(in,email);
     }
 
-    public void bookSlot(Scanner sc,int customerId) {
-        customerLogic.bookSlot(sc,customerId);
+    public void viewCatalog(Scanner in, String email) throws Exception {
+//     System.out.println("Welcome to FlipFit Gym Application");
+//     System.out.println("Menu:-");
+        fetchGymList();
 
-    }
+        System.out.print("Choose Gym ID: ");
+        int gymId = in.nextInt();
+        boolean check = customerGMSService.checkGymApprove(gymId);
 
-    public void cancelBookedSlot(Scanner sc) {
-        System.out.println("Enter Slot Id");
-        int slotId = sc.nextInt();
-        System.out.println("Enter Date");
-        String date = sc.next();
-        customerLogic.cancelSlot(slotId,customerId,date);
-        customerPage(sc);
+        if(!check)
+        {
+            System.out.println("This gym has not been approved yet!");
+            CustomerActionPage(in,email);
+            return;
+        }
+        boolean slotsAvailable = customerGMSService.fetchAvilableSlots(gymId);
+        if(slotsAvailable) {
+            System.out.print("Enter Slot ID for which you want to make booking: ");
+            String slotId = in.next();
 
-    }
+            boolean flag =customerGMSService.checkSlotExists(slotId, gymId);
+            if(!flag)
+            {
+                System.out.println("No slots found for this gym");
+                CustomerActionPage(in, email);
+                return;
+            }
 
-    public void viewAllBookedSlots(Scanner sc ,int customerId) {
-        customerLogic.viewAllBookings(customerId);
-        customerPage(sc);
-    }
+            System.out.print("Enter your Date: ");
+            String date = in.next();
 
-    public void customerPage(Scanner sc) {
+            int response = customerGMSService.bookSlots(gymId, slotId, email, date);
+            switch (response) {
+                case 0:
+                    System.out.println("This time is already booked\nCancelling that slot and booking new");
 
-        while(true) {
-            System.out.println("1. Book slot");
-            System.out.println("2. Cancel Booked slot");
-            System.out.println("3. View all booked Slots");
-            System.out.println("4. Exit");
-            System.out.print("Enter your choice: ");
-            int choice = sc.nextInt();
-            switch (choice) {
+                    break;
                 case 1:
-                    bookSlot(sc,customerId);
+                    System.out.println("There are no more slots left");
                     break;
                 case 2:
-                    cancelBookedSlot( sc);
+                    System.out.println("Congratulations your slot is booked");
+                    break;
+                // Default case statement
+                default:
+                    System.out.println("Incorrect choice!!! Please try again!!!");
+            }
+        }
+        else {
+            viewCatalog(in,email);
+        }
+
+    }
+
+    public void fetchGymList() {
+        List<GymCentre> gymDetails = customerGMSService.fetchGymList();
+        System.out.println("Gym Id \t  GymOwner \t       GymName");
+        for(GymCentre gym: gymDetails) {
+
+            System.out.printf("%-5s\t", gym.getGymId() );
+            System.out.printf("%-5s\t",gym.getGymOwnerEmail());
+            System.out.printf("%-5s\t", gym.getName() );
+            System.out.println("");
+        }
+        System.out.println("NONO");
+        System.out.println("**********************************");
+
+    }
+
+    private void cancelBookedSlots(Scanner in, String email) {
+        customerGMSService.fetchBookedSlots(email);
+        System.out.print("Enter Booking ID that you want to cancel: ");
+        int bookingId =in.nextInt();
+        customerGMSService.cancelBookedSlots(bookingId);
+
+    }
+
+    public void CustomerActionPage(Scanner in, String email) throws Exception {
+        int choice = 0;
+
+        while(choice != 4) {
+//        System.out.println("Welcome to FlipFit Gym Application");
+
+            System.out.println("Menu:-");
+            System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Exit");
+            System.out.print("Enter your choice: ");
+            choice = in.nextInt();
+
+            switch (choice) {
+                case 1:
+                    viewCatalog(in, email);
+                    break;
+                case 2:
+                    customerGMSService.fetchBookedSlots(email);
                     break;
                 case 3:
-                    viewAllBookedSlots(sc,customerId);
+                    cancelBookedSlots(in, email);
+                    break;
                 case 4:
                     ApplicationClient.mainPage();
                     break;
                 default:
-                    System.out.println("Incorrect choice");
+                    System.out.println("Incorrect choice!!! Please try again!!!");
             }
         }
-
 
     }
 }

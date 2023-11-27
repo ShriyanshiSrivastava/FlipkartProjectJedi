@@ -1,13 +1,50 @@
 package com.flipkart.client;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
-import com.flipkart.business.AdminLogic;
-import com.flipkart.business.CustomerLogic;
-import com.flipkart.business.GymOwnerLogic;
+
+import com.flipkart.bean.User;
+import com.flipkart.business.UserLogicImpl;
 
 public class ApplicationClient {
 
-	public static void mainPage() {
+	public static void login() throws Exception
+	{
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter your username: ");
+		String username = in.next();
+		System.out.println(username+" ->"+username);
+		System.out.println("Enter your correct password: ");
+		String password = in.next();
+
+		User user = new User(username,password,0);
+		UserLogicImpl authentication = new UserLogicImpl();
+		LocalDateTime localDateTime = LocalDateTime.now();
+		if(authentication.authenticateUser(user) != null) {
+			System.out.println("Welcome " + username + "! You are logged in.");
+			System.out.println("Current Date and Time: "+ localDateTime);
+			int role = user.getRoleId();
+			switch(role) {
+				case 1:
+					CustomerGMSMenu Customer = new CustomerGMSMenu();
+					Customer.CustomerActionPage(in, user.getEmail());
+
+					break;
+				case 2:
+
+					break;
+				case 3:
+					AdminGMSMenu Admin = new AdminGMSMenu();
+					Admin.AdminPage(in);
+					break;
+			}
+		}else {
+			login();
+		}
+
+	}
+
+	public static void mainPage() throws Exception {
 	    System.out.println("Welcome to FlipFit Application");
 
 
@@ -35,10 +72,10 @@ public class ApplicationClient {
 				int choice = sc.nextInt();
 				switch (choice) {
 					case 1:
-						customer.customerRegistration(sc);
+						customer.CustomerRegistration(sc);
 						break;
 					case 2:
-						customer.testingFunction();
+						login();
 						break;
 					case 3:
 						ApplicationClient.mainPage();
