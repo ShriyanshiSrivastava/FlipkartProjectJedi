@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CustomerDAOImpl implements CustomerDAO {
     public List<GymCentre> fetchGymList() {
-//     System.out.println("Connecting to database...");
         List<GymCentre> gymDetails = new ArrayList<>();
 
         Connection conn = null;
@@ -21,7 +20,6 @@ public class CustomerDAOImpl implements CustomerDAO {
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_APPROVED_GYMS);
 
             ResultSet rs = stmt.executeQuery();
-            //System.out.println("Gym Id \t  GymOwner \t    GymName");
 
             while (rs.next()) {
                 GymCentre gym = new GymCentre();
@@ -30,10 +28,8 @@ public class CustomerDAOImpl implements CustomerDAO {
                 gym.setName(rs.getString("name"));
                 gym.setAddress(rs.getString("address"));
                 gym.setNumItem(rs.getInt("numItem"));
-//                gym.setTotalArea(rs.getDouble("totalArea"));
                 gymDetails.add(gym);
             }
-//         System.out.println("*********************************************");
         } catch(SQLException sqlExcep) {
             System.out.println(sqlExcep);
         } catch(Exception excep) {
@@ -43,7 +39,6 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public void fetchSlotList(int gymId) {
-//     System.out.println("Connecting to database...");
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -60,7 +55,6 @@ public class CustomerDAOImpl implements CustomerDAO {
             System.out.println("SlotId \t SlotTime \t GymId");
             do {
                 System.out.printf("%-7s\t", output.getString(3) );
-//                System.out.printf("  %-9s\t",output.getString(2));
                 System.out.printf("  %-9s\t", output.getString(5) );
                 System.out.printf("  %-9s\t", output.getString(1) );
                 System.out.println("");
@@ -72,7 +66,6 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public void bookSlots(int gymId, String slotId,String email,String date) {
-//     System.out.println("Connecting to database...");
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -98,7 +91,6 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public boolean isFull(String slotId,String date) {
-//     System.out.println("Connecting to database...");
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -128,9 +120,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     public void fetchBookedSlots(String email) {
 
-
-//     System.out.println("Connecting to database...");
-
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -155,7 +144,6 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public void cancelBooking(String slotId, String email, String date) {
-//  System.out.println("Connecting to database...");
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -173,14 +161,12 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch(Exception excep) {
             excep.printStackTrace();
         }
-//     return false;
 
 
     }
 
 
     public boolean alreadyBooked(String slotId, String email, String date) {
-//  System.out.println("Connecting to database...");
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -214,9 +200,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             System.out.println(gymId);
             stmt.setString(1, slotId);
             stmt.setInt(2, gymId);
-//         stmt.setString(3, date);
             ResultSet output = stmt.executeQuery();
-//            System.out.println(output.next());
             if(output.next())
                 return true;
         } catch(SQLException sqlExcep) {
@@ -256,7 +240,6 @@ public class CustomerDAOImpl implements CustomerDAO {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_GYM_APPROVE);
             stmt.setInt(1, gymId);
-//         stmt.setString(3, date);
             ResultSet output = stmt.executeQuery();
             if(output.next())
                 return true;

@@ -30,11 +30,9 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 	/**
 	 This method fetches all the possible slots that a gym owner can select from.
 	 @return The list of Slots objects representing the possible slots
-	 @throws IncorrectDataException if no slot data is found
 	 */
 	public List<Slot> viewAllSlots(){
 		System.out.println("Listing all Slots in GymCenter");
-		//return allSlots;
 		return gymOwnerDAO.viewAllSlots();
 	}
 
@@ -80,13 +78,11 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 		} catch (Exception ex) {
 			throw new IncorrectDataException();
 		}
-//		gymList = gymOwnerDAO.viewAllGymCenters(gymOwnerEmail);
 		System.out.println();
 		System.out.println("-------------------------------------");
 		System.out.printf("%5s %10s %8s %10s", "CenterId","Location", "Name", "Approved");
 		System.out.println();
 		return gymList;
-//		return allGyms;
 	}
 	public void createSlot(Slot slot){
 		gymOwnerDAO.createSlot(slot);

@@ -33,10 +33,8 @@ public class AdminDAOImpl implements AdminDAO {
             }
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
 
@@ -68,10 +66,8 @@ public class AdminDAOImpl implements AdminDAO {
             }
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
 
@@ -101,7 +97,6 @@ public class AdminDAOImpl implements AdminDAO {
             }
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
             // Handle errors for Class.forName
@@ -155,10 +150,8 @@ public class AdminDAOImpl implements AdminDAO {
             System.out.println("The gym owner has been approved!");
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
     }
@@ -175,10 +168,8 @@ public class AdminDAOImpl implements AdminDAO {
             System.out.println("The gym has been approved!");
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
     }

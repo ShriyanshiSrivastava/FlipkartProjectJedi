@@ -47,7 +47,7 @@ public class AdminLogicImpl implements AdminLogic {
 
 	/**
 	 * Approves a single gym owner request.
-	 * @param requestId The ID of the request to be approved
+	 * @param email The email of the request to be approved
 	 */
 	public void approveGymOwnerRequest(String email) {
 		adminGMSDao.approveSingleOwnerRequest(email);

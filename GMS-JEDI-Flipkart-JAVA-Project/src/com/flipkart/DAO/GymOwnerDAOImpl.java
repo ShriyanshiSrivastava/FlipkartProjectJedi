@@ -36,10 +36,8 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             gymOwnerDetails.setApproved(rs.getBoolean("isApproved"));
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
 
@@ -68,10 +66,8 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             }
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
         return allSlot;
@@ -90,10 +86,8 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             }
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
         return 0;
@@ -111,10 +105,8 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             return rs.next();
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
         return false;
@@ -124,11 +116,8 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
     public void addSlots(int gymId, String time) {
         int slotCapacity = findCapacity(gymId);
         int custId=0;
-        //slotCapacity=slotCapacity-1;
-        //int slotId=slotCapacity;
         int slotId=0;
         String date=time;
-       //String time="";
         try{
 
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
@@ -142,10 +131,8 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             System.out.println("Slot added!");
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
     }
@@ -156,7 +143,6 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
         PreparedStatement statement = null;
 
         try {
-//			connection = DBUtils.getConnection();
             connection = DriverManager
                     .getConnection("jdbc:mysql://localhost:3306/GMSFlipFit", "root", "2001");
             statement = connection.prepareStatement(SQLConstants.CREATE_SLOT);
@@ -199,10 +185,8 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             }
 
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
         return gymDetails;
@@ -224,21 +208,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             stmt.setInt(2,gymDetails.getNoOfSeat());
             stmt.setBoolean(5, false);
             stmt.executeUpdate();
-
-            // STEP 6: Clean-up environment
-            // rs.close();
             stmt.close();
-//			conn.close();
         } catch (SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
-            // end finally try
-        } // end try
-//		System.out.println("Added Gymnaisum");
-        return;
+        }
     }
 
     public boolean isApproved(String email) {
@@ -249,7 +224,6 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_OWNER_APPROVE);
             stmt.setString(1, email);
-//		    stmt.setString(3, date);
             ResultSet output = stmt.executeQuery();
             if(output.next())
                 return true;
@@ -269,7 +243,6 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_GYM_APPROVE);
             stmt.setInt(1, gymId);
-//		    stmt.setString(3, date);
             ResultSet output = stmt.executeQuery();
             if(output.next())
                 return true;
