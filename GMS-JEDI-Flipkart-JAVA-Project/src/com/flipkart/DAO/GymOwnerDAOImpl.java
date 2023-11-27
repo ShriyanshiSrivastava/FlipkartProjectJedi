@@ -59,9 +59,9 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
             while (rs.next()) {
                 Slot slot = new Slot();
+                slot.setSlotId(rs.getInt("slotId"));
                 slot.setSlotId(Integer.parseInt(rs.getString("gymId")));
                 slot.setCustomerId(rs.getInt("custId"));
-                slot.setSlotId(rs.getInt("slotId"));
                 slot.setDate(rs.getString("date"));
                 slot.setTime(rs.getString("time"));
                 allSlot.add(slot);
@@ -123,19 +123,16 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     public void addSlots(int gymId, String time) {
         int slotCapacity = findCapacity(gymId);
-        System.out.println("this is cap" + slotCapacity);
         int custId=0;
-        slotCapacity=slotCapacity-1;
-        int slotId=slotCapacity;
+        //slotCapacity=slotCapacity-1;
+        //int slotId=slotCapacity;
+        int slotId=0;
         String date=time;
-//        //String time="";
-//        System.out.println("second");
+       //String time="";
         try{
 
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
-            System.out.println("connection est");
             stmt = conn.prepareStatement(SQLConstants.SQL_ALL_SLOTS);
-            System.out.println("again");
             stmt.setString(1, String.valueOf(gymId));
             stmt.setInt(2, custId);
             stmt.setInt(3, slotId);
@@ -151,27 +148,6 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             // Handle errors for Class.forName
             e.printStackTrace();
         }
-
-//        Connection connection = null;
-//        PreparedStatement statement = null;
-//
-//        try {
-////			connection = DBUtils.getConnection();
-//            connection = DriverManager
-//                    .getConnection("jdbc:mysql://localhost:3306/GMSFlipFit", "root", "2001");
-//            statement = connection.prepareStatement(SQLConstants.INSERT_SLOT);
-//
-//            statement.setInt(1,gymId);
-//            statement.setInt(2,Slot.getSlotId());
-//            statement.setString(3,Slot.getTime());
-//            statement.executeUpdate();
-//            statement.close();
-//
-//        } catch(SQLException sqlExcep) {
-//            System.out.println(sqlExcep);
-//        } catch(Exception excep) {
-//            excep.printStackTrace();
-//        }
     }
 
     public void createSlot(Slot slot){

@@ -6,6 +6,8 @@ import java.util.Scanner;
 import com.flipkart.bean.*;
 import com.flipkart.business.CustomerLogicImpl;
 import com.flipkart.business.UserLogicImpl;
+import com.flipkart.exceptions.GymCentreNotFoundException;
+import com.flipkart.exceptions.SlotNotFoundException;
 
 
 public class CustomerGMSMenu {
@@ -70,8 +72,12 @@ public class CustomerGMSMenu {
 
             System.out.print("Enter your Date: ");
             String date = in.next();
-
-            int response = customerGMSService.bookSlots(gymId, slotId, email, date);
+            int response=0;
+            try{
+               response = customerGMSService.bookSlots(gymId, slotId, email, date);
+            } catch (SlotNotFoundException exception){
+                System.out.println(exception.getMessage());
+            }
             switch (response) {
                 case 0:
                     System.out.println("This time is already booked\nCancelling that slot and booking new");
@@ -95,10 +101,16 @@ public class CustomerGMSMenu {
     }
 
     public void fetchGymList() {
-        List<GymCentre> gymDetails = customerGMSService.fetchGymList();
+        List<GymCentre> gymDetails = null;
+        try {
+            gymDetails = customerGMSService.fetchGymList();
+        } catch (GymCentreNotFoundException exception){
+            System.out.println(exception.getMessage());
+        }
         System.out.println();
         System.out.println("**********************************");
         System.out.println("Gym Id \t  GymOwner \t       GymName");
+        if(gymDetails==null) throw new NullPointerException();
         for(GymCentre gym: gymDetails) {
             System.out.printf("%-5s\t", gym.getGymId() );
             System.out.printf("%-5s\t",gym.getGymOwnerEmail());

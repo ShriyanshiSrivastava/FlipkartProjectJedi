@@ -3,6 +3,8 @@ package com.flipkart.business;
 import com.flipkart.DAO.CustomerDAOImpl;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
+import com.flipkart.exceptions.GymCentreNotFoundException;
+import com.flipkart.exceptions.SlotNotFoundException;
 
 import java.util.List;
 
@@ -23,8 +25,12 @@ public class CustomerLogicImpl implements CustomerLogic {
 	 * Fetches the list of available gyms for the customer.
 	 * @return List of Gym objects representing the available gyms
 	 */
-	public List<GymCentre> fetchGymList() {
+	public List<GymCentre> fetchGymList() throws GymCentreNotFoundException {
 		List<GymCentre> gymList =  customerDaoImpl.fetchGymList();
+		if(gymList.size()==0){
+			throw new GymCentreNotFoundException();
+		}
+
 		return gymList;
 	}
 
@@ -52,7 +58,10 @@ public class CustomerLogicImpl implements CustomerLogic {
 	 * @param date The date of the slot
 	 * @return The booking ID if the slots are successfully booked, 0 if the slot is already booked and replaced, 1 if the slot is already full, 2 if the slots are successfully booked
 	 */
-	public int bookSlots(int gymId, String slotId, String email, String date) {
+	public int bookSlots(int gymId, String slotId, String email, String date) throws SlotNotFoundException {
+		if(slotId == null){
+			throw new SlotNotFoundException();
+		}
 		if(alreadyBooked(slotId, email, date)) {
 			customerDaoImpl.cancelBooking(slotId, email, date);
 			customerDaoImpl.bookSlots(gymId, slotId, email, date);

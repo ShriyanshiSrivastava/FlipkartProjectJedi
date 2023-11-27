@@ -4,6 +4,7 @@ import com.flipkart.DAO.UserDAOImpl;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
+import com.flipkart.exceptions.UserNotFoundException;
 
 public class UserLogicImpl implements UserLogic {
     UserDAOImpl userGMSDao = new UserDAOImpl();
@@ -20,16 +21,18 @@ public class UserLogicImpl implements UserLogic {
 
      <<<<<<< Updated upstream
 
-     public void registerGymOwner(GymOwner gymOwner) {
+     public void registerGymOwner(GymOwner) {
      //System.out.println("GymOwner registered");
      UserDAO.registerGymOwner(gymOwner);
      =======
      Registers a gym owner in the database.
      @param ownerData The GymOwner object representing the gym owner data
      */
-    public void registerGymOwner(GymOwner ownerData) {
+    public void registerGymOwner(GymOwner ownerData) throws UserNotFoundException {
+        if(ownerData==null){
+            throw new UserNotFoundException();
+        }
         userGMSDao.registerGymOwner(ownerData);
-
     }
     /**
 
@@ -54,16 +57,6 @@ public class UserLogicImpl implements UserLogic {
      */
     public void registerUser(User userData) {
         userGMSDao.registerUser(userData);
-    }
-    /**
-
-     Logs out a user.
-     @param userData The User object representing the user data
-     @return true if the user is successfully logged out, false otherwise
-     */
-    public boolean logout(User userData) {
-        // Perform logout logic here
-        return true;
     }
 }
 

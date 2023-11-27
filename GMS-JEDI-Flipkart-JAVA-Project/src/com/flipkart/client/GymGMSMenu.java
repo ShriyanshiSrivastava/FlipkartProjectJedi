@@ -7,6 +7,9 @@ import com.flipkart.bean.Slot;
 import com.flipkart.bean.User;
 import com.flipkart.business.GymOwnerLogicImpl;
 import com.flipkart.business.UserLogicImpl;
+import com.flipkart.exceptions.GymOwnerNotFoundException;
+import com.flipkart.exceptions.IncorrectDataException;
+import com.flipkart.exceptions.UserNotFoundException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -44,7 +47,11 @@ public class GymGMSMenu {
         user.setRoleId(2);
 
         UserLogicImpl userLogicImpl = new UserLogicImpl();
-        userLogicImpl.registerGymOwner(gymOwner);
+        try {
+            userLogicImpl.registerGymOwner(gymOwner);
+        } catch (UserNotFoundException exception){
+            System.out.println(exception.getMessage());
+        }
     }
 
     public void registerGym(Scanner in) {
@@ -71,7 +78,14 @@ public class GymGMSMenu {
     }
 
     public void getAllGymDetails(Scanner in) {
-        List<GymCentre> allGyms = gymOwnerBusiness.viewAllGymCenters(gymOwner.getEmail());
+        List<GymCentre> allGyms=null;
+        try {
+            allGyms = gymOwnerBusiness.viewAllGymCenters(gymOwner.getEmail());
+        } catch (GymOwnerNotFoundException exception){
+            System.out.println(exception.getMessage());
+        } catch (IncorrectDataException e) {
+            throw new RuntimeException(e.getMessage());
+        }
         for(GymCentre gym : allGyms) {
             System.out.printf("%-8s\t", gym.getGymId());
             System.out.printf("%-8s\t", gym.getAddress());

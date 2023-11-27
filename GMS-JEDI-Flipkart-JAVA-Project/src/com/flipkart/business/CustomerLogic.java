@@ -1,13 +1,15 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.GymCentre;
+import com.flipkart.exceptions.GymCentreNotFoundException;
+import com.flipkart.exceptions.SlotNotFoundException;
 
 import java.util.List;
 
 public interface CustomerLogic {
-    List<GymCentre> fetchGymList();
+    List<GymCentre> fetchGymList() throws GymCentreNotFoundException;
     boolean fetchAvilableSlots(int gymId);
-    int bookSlots(int gymId, String slotId, String email, String date);
+    int bookSlots(int gymId, String slotId, String email, String date) throws SlotNotFoundException;
     boolean alreadyBooked(String slotId, String email, String date);
     boolean isFull(String slotId, String date);
     void fetchBookedSlots(String email);
