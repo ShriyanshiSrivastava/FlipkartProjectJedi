@@ -8,6 +8,9 @@ import com.flipkart.exceptions.SlotNotFoundException;
 
 import java.util.List;
 
+/**
+ * This class implements the CustomerLogicInterface and provides the functionality for customer operations in the Gym Management System.
+ */
 public class CustomerLogicImpl implements CustomerLogic {
 
 	CustomerDAOImpl customerDaoImpl = new CustomerDAOImpl();
@@ -96,9 +99,6 @@ public class CustomerLogicImpl implements CustomerLogic {
 	}
 
 
-
-
-
 	/**
 	 * Fetches the booked slots for a customer based on the customer's email.
 	 * @param email The email of the customer
@@ -119,7 +119,6 @@ public class CustomerLogicImpl implements CustomerLogic {
 
 	/**
 	 * Cancels a booked slot for a customer based on the booking ID.
-	 * @param email The email of the customer
 	 * @param bookingId The ID of the booking to cancel
 	 */
 	public void cancelBookedSlots(int bookingId) {

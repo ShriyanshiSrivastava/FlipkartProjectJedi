@@ -1,10 +1,13 @@
 package com.flipkart.business;
 
 import java.util.List;
-
 import com.flipkart.DAO.AdminDAOImpl;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
+
+/**
+ * This class implements the AdminGMSInterface and provides the functionality for admin operations in the Gym Management System.
+ */
 
 public class AdminLogicImpl implements AdminLogic {
 

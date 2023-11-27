@@ -11,23 +11,38 @@ import com.flipkart.exceptions.IncorrectDataException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements the GymOwnerLogicInterface and provides the functionality for GYmOwner operations in the Gym Management System.
+ */
 public class GymOwnerLogicImpl implements GymOwnerLogic {
-
-	List<Slot> allSlots;
-	List<GymCentre> allGyms;
-
 	GymOwnerDAO gymOwnerDAO = new GymOwnerDAOImpl();
+
+	/**
+	 This method fetches the details of a gym owner based on the gym owner ID.
+	 @param gymOwnerId The ID of the gym owner
+	 @return The GymOwner object representing the gym owner details
+	 */
 
 	public GymOwner getGymOwnerDetails(String gymOwnerId) {
 		return gymOwnerDAO.getGymOwnerDetails(gymOwnerId);
 	}
 
+	/**
+	 This method fetches all the possible slots that a gym owner can select from.
+	 @return The list of Slots objects representing the possible slots
+	 @throws IncorrectDataException if no slot data is found
+	 */
 	public List<Slot> viewAllSlots(){
 		System.out.println("Listing all Slots in GymCenter");
 		//return allSlots;
 		return gymOwnerDAO.viewAllSlots();
 	}
 
+	/**
+	 This method checks if a gym is already booked based on the gym ID.
+	 @param gymId The ID of the gym
+	 @return true if the gym is already booked, false otherwise
+	 */
 	public boolean checkIfAlreadyBooked(int gymId) {
 		return gymOwnerDAO.checkIfAlreadyBooked(gymId);
 	}
@@ -37,10 +52,23 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 	public boolean isApproved(String gymOwnerEmail) {
 		return gymOwnerDAO.isApproved(gymOwnerEmail);
 	}
+
+	/**
+	 This method allows a gym owner to add a particular slot for their gym.
+	 @param gymCenterId The ID of the gym
+	 @param date The date for the gym
+	 */
 	public void addSlots(int gymCenterId,String date) {
 		gymOwnerDAO.addSlots(gymCenterId, date);
 		return;
 	}
+/**
+ 	This method fetches the gym details that belong to a gym owner.
+	@param gymOwnerEmail The email of the gym owner
+	@return The list of GymCentre objects representing the gym details
+	@throws GymOwnerNotFoundException if the gym owner ID is not found
+	@throws IncorrectDataException if no gym data is found
+ */
 	public List<GymCentre> viewAllGymCenters(String gymOwnerEmail) throws GymOwnerNotFoundException, IncorrectDataException {
 		System.out.println("Listing all Gym Centres");
 		List<GymCentre> gymList = new ArrayList<GymCentre>();
@@ -64,6 +92,11 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 		gymOwnerDAO.createSlot(slot);
 	}
 
+	/**
+	 This method checks if a gym is approved based on the gym ID.
+	 @param gymId The ID of the gym
+	 @return true if the gym is approved, false otherwise
+	 */
 	public boolean checkGymApproval(int gymId) {
 		return gymOwnerDAO.checkGymApproval(gymId);
 	}
