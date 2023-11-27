@@ -21,7 +21,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_APPROVED_GYMS);
 
             ResultSet rs = stmt.executeQuery();
-            System.out.println("Gym Id \t  GymOwner \t       GymName");
+            //System.out.println("Gym Id \t  GymOwner \t    GymName");
 
             while (rs.next()) {
                 GymCentre gym = new GymCentre();

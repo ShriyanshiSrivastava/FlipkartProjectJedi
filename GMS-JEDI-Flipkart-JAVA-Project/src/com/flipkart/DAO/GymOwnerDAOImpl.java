@@ -60,7 +60,6 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             while (rs.next()) {
                 Slot slot = new Slot();
                 slot.setSlotId(Integer.parseInt(rs.getString("gymId")));
-                System.out.println("slotId " + slot.getSlotId());
                 slot.setCustomerId(rs.getInt("custId"));
                 slot.setSlotId(rs.getInt("slotId"));
                 slot.setDate(rs.getString("date"));
@@ -210,6 +209,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             stmt.setString(1, gymOwnerEmail);
 
             ResultSet rs = stmt.executeQuery();
+            System.out.println();
             System.out.println("Gym Owner Email : " + gymOwnerEmail);
             while (rs.next()) {
                 GymCentre gym = new GymCentre();

@@ -52,7 +52,7 @@ public class ApplicationClient {
 	    Scanner sc = new Scanner(System.in);
 	    System.out.println("Enter the role");
 	    String role = sc.next();
-	    if(role.equals("Admin"))
+	    if(role.equalsIgnoreCase("Admin"))
 	    {
 
 	          System.out.println("Welcome to Admin Menu");
@@ -60,7 +60,7 @@ public class ApplicationClient {
 			  admin.AdminPage(sc);
 
 	    }
-	    else if(role.equals("Customer"))
+	    else if(role.equalsIgnoreCase("Customer"))
 	    {
 	       System.out.println("Welcome to Customer Menu");
 			CustomerGMSMenu customer=new CustomerGMSMenu();
@@ -83,11 +83,8 @@ public class ApplicationClient {
 					default:
 						System.out.println("Incorrect choice");
 				}
-			//}
-//			customer.testingFunction();
-//			customer.CustomerRegistration();
 	    }
-	    else if(role.equals("GymOwner"))
+	    else if(role.equalsIgnoreCase("GymOwner"))
 	    {
 			System.out.println("1. Register");
 			System.out.println("2. Login");

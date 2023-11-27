@@ -74,8 +74,9 @@ public class GymGMSMenu {
         List<GymCentre> allGyms = gymOwnerBusiness.viewAllGymCenters(gymOwner.getEmail());
         for(GymCentre gym : allGyms) {
             System.out.printf("%-8s\t", gym.getGymId());
-            //System.out.printf("%-8s\t", gym.getLocationId());
-            System.out.printf("%-8s\t", gym.getNoOfSeat());
+            System.out.printf("%-8s\t", gym.getAddress());
+            //System.out.printf("%-8s\t", gym.getNoOfSeat());
+            System.out.printf("%-8s\t", gym.getName());
 
             if(gym.isApproved())
             {
@@ -136,9 +137,10 @@ public class GymGMSMenu {
 
     private void viewSlots(int gymCentreId) {
         List<Slot> slots = gymOwnerBusiness.viewAllSlots();
+        System.out.println();
+        System.out.println("**********************************");
         System.out.println("Time ");
         for (Slot slot : slots) {
-            System.out.println("HUFFF");
             System.out.printf("%-8s\t", slot.getTime());
             System.out.println("");
         }

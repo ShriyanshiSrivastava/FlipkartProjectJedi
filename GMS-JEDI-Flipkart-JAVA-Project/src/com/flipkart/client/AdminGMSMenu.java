@@ -97,14 +97,15 @@ public class AdminGMSMenu {
     public void viewAllGymOwners() {
 
         List<GymOwner> gymOwnerDetails = adminBusiness.viewAllGymOwners();
-
-        System.out.println("Email \t\t\t Name \t\t AadhaarNumber \t GSTNumber \tApproved ");
+        System.out.println();
+        System.out.println("**********************************");
+        System.out.println("Email \t\t\t Name \t\t Address \t GSTNumber \tApproved ");
         for(GymOwner owner: gymOwnerDetails) {
-            System.out.println("Kismish");
+
             System.out.printf("%-8s\t", owner.getEmail());
             System.out.printf("%-8s\t", owner.getName());
-            System.out.printf("%-5s\t", owner.getAadhar());
-            System.out.printf("%-5s\t", owner.getGstNumber());
+            System.out.printf("%-8s\t", owner.getAddress());
+            System.out.printf("%-8s\t", owner.getGstNumber());
             if(owner.isApproved())
             {
                 System.out.printf("%-8s\t", "Yes");
@@ -116,6 +117,7 @@ public class AdminGMSMenu {
             System.out.println("");
         }
         System.out.println("**********************************");
+        System.out.println();
     }
 
     public void AdminPage(Scanner in) throws Exception {

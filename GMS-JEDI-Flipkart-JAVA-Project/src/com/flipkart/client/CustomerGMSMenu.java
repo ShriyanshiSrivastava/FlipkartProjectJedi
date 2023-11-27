@@ -16,14 +16,11 @@ public class CustomerGMSMenu {
         System.out.println("Enter your name: ");
         String name = in.next();
         customer.setName(name);
-        System.out.println(name +" -> "+customer.getName());
         //System.out.println("Enter your mobile: ");
 //        customer.setMobile(in.next());
         System.out.println("Enter your email: ");
         String email = in.next();
         customer.setEmail(email);
-        System.out.println(email +" -> "+customer.getEmail());
-
         System.out.println("Enter your address: ");
         String address = in.next();
         customer.setAddress(address);
@@ -44,8 +41,8 @@ public class CustomerGMSMenu {
     }
 
     public void viewCatalog(Scanner in, String email) throws Exception {
-//     System.out.println("Welcome to FlipFit Gym Application");
-//     System.out.println("Menu:-");
+        System.out.println("Welcome to FlipFit Gym Application");
+        System.out.println("Menu:-");
         fetchGymList();
 
         System.out.print("Choose Gym ID: ");
@@ -99,17 +96,16 @@ public class CustomerGMSMenu {
 
     public void fetchGymList() {
         List<GymCentre> gymDetails = customerGMSService.fetchGymList();
+        System.out.println();
+        System.out.println("**********************************");
         System.out.println("Gym Id \t  GymOwner \t       GymName");
         for(GymCentre gym: gymDetails) {
-
             System.out.printf("%-5s\t", gym.getGymId() );
             System.out.printf("%-5s\t",gym.getGymOwnerEmail());
             System.out.printf("%-5s\t", gym.getName() );
             System.out.println("");
         }
-        System.out.println("NONO");
         System.out.println("**********************************");
-
     }
 
     private void cancelBookedSlots(Scanner in, String email) {

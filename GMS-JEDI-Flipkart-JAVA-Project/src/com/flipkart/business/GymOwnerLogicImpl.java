@@ -54,8 +54,6 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 	}
 	public List<GymCentre> viewAllGymCenters(String gymOwnerEmail){
 		System.out.println("Listing all Gym Centres");
-		System.out.printf("%5s %10s %8s %10s", "CenterId","Location", "Seats", "Approved");
-		System.out.println();
 		List<GymCentre> gymList = new ArrayList<GymCentre>();
 //		if (gymOwnerId == null) {
 //			throw new NoGymOwnerIdFoundException();
@@ -66,8 +64,11 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 //			throw new NoDataFoundException();
 //		}
 //		return gymList;
-
 		gymList = gymOwnerDAO.viewAllGymCenters(gymOwnerEmail);
+		System.out.println();
+		System.out.println("-------------------------------------");
+		System.out.printf("%5s %10s %8s %10s", "CenterId","Location", "Name", "Approved");
+		System.out.println();
 		return gymList;
 //		return allGyms;
 	}
