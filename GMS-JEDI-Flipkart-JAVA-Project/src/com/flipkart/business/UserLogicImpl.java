@@ -6,6 +6,9 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.exceptions.UserNotFoundException;
 
+import static com.flipkart.utils.ColorConstants.ANSI_RED;
+import static com.flipkart.utils.ColorConstants.ANSI_RESET;
+
 public class UserLogicImpl implements UserLogic {
     UserDAOImpl userGMSDao = new UserDAOImpl();
 
@@ -37,7 +40,7 @@ public class UserLogicImpl implements UserLogic {
             User authenticatedUser = userGMSDao.isAuthenticated(userData);
             return authenticatedUser;
         } catch (Exception e) {
-            System.out.println("User Not Found");
+            System.out.println(ANSI_RED + "User Not Found" + ANSI_RESET);
 
         }
         return null;

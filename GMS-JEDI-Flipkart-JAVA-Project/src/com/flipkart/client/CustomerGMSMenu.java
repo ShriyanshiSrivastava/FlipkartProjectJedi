@@ -9,6 +9,9 @@ import com.flipkart.business.UserLogicImpl;
 import com.flipkart.exceptions.GymCentreNotFoundException;
 import com.flipkart.exceptions.SlotNotFoundException;
 
+import static com.flipkart.utils.ColorConstants.ANSI_RED;
+import static com.flipkart.utils.ColorConstants.ANSI_RESET;
+
 
 public class CustomerGMSMenu {
     Customer customer = new Customer();
@@ -26,13 +29,13 @@ public class CustomerGMSMenu {
         System.out.println("Enter your address: ");
         String address = in.next();
         customer.setAddress(address);
-        System.out.println(address);
+//        System.out.println(address);
 //        System.out.println("Enter your dob: ");
 //        customer.setDob(in.next());
         System.out.println("Enter your password: ");
         String password = in.next();
         customer.setPassword(password);
-        System.out.println(password);
+//        System.out.println(password);
 
         User user = new User(customer.getEmail(),password,1);
         UserLogicImpl userService = new UserLogicImpl();
@@ -65,7 +68,7 @@ public class CustomerGMSMenu {
             boolean flag =customerGMSService.checkSlotExists(slotId, gymId);
             if(!flag)
             {
-                System.out.println("No slots found for this gym");
+                System.out.println(ANSI_RED + "No slots found for this gym" + ANSI_RESET);
                 CustomerActionPage(in, email);
                 return;
             }
@@ -80,7 +83,7 @@ public class CustomerGMSMenu {
             }
             switch (response) {
                 case 0:
-                    System.out.println("This time is already booked\nCancelling that slot and booking new");
+                    System.out.println(ANSI_RED + "This time is already booked\nCancelling that slot and booking new" + ANSI_RESET);
 
                     break;
                 case 1:
@@ -108,16 +111,17 @@ public class CustomerGMSMenu {
             System.out.println(exception.getMessage());
         }
         System.out.println();
-        System.out.println("**********************************");
-        System.out.println("Gym Id \t  GymOwner \t       GymName");
+        System.out.println("*****************************************");
+        System.out.printf("%-16s %-16s %-16s %n", "Gym Id", "GymOwner", "GymName");
         if(gymDetails==null) throw new NullPointerException();
         for(GymCentre gym: gymDetails) {
-            System.out.printf("%-5s\t", gym.getGymId() );
-            System.out.printf("%-5s\t",gym.getGymOwnerEmail());
-            System.out.printf("%-5s\t", gym.getName() );
+
+            System.out.printf("%-16s\t", gym.getGymId() );
+            System.out.printf("%-16s\t",gym.getGymOwnerEmail());
+            System.out.printf("%-16s\t", gym.getName() );
             System.out.println("");
         }
-        System.out.println("**********************************");
+        System.out.println("****************************************");
     }
 
     private void cancelBookedSlots(Scanner in, String email) {

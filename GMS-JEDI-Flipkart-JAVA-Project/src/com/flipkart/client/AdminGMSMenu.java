@@ -7,6 +7,9 @@ import com.flipkart.business.AdminLogicImpl;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.flipkart.utils.ColorConstants.ANSI_BLUE;
+import static com.flipkart.utils.ColorConstants.ANSI_RESET;
+
 public class AdminGMSMenu {
     AdminLogicImpl adminBusiness = new AdminLogicImpl();
 
@@ -30,7 +33,7 @@ public class AdminGMSMenu {
         // TODO Auto-generated method stub
         List<GymCentre> gymDetails = adminBusiness.viewPendingGymRequests();
 
-        System.out.println("Gym Id \t Name \tAddress \tApproved ");
+        System.out.println(ANSI_BLUE + "Gym Id \t Name \tAddress \tApproved " + ANSI_RESET);
         for(GymCentre gym: gymDetails) {
             System.out.printf("%-5s\t", gym.getGymId());
             System.out.printf("%-8s\t", gym.getName());

@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.flipkart.utils.ColorConstants.*;
+
 public class UserDAOImpl implements UserDAO {
     static Connection conn = null;
     static PreparedStatement stmt = null;
@@ -59,7 +61,7 @@ public class UserDAOImpl implements UserDAO {
         }catch(Exception e){
             e.printStackTrace();
         }
-        System.out.println("Added Customer details");
+        System.out.println(ANSI_GREEN + "Added Customer details" + ANSI_RESET);
     }
 
     public void registerGymOwner(GymOwner ownerData) {

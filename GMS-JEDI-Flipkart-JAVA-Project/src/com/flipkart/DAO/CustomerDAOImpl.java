@@ -7,6 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.flipkart.utils.ColorConstants.*;
+
 public class CustomerDAOImpl implements CustomerDAO {
     public List<GymCentre> fetchGymList() {
         List<GymCentre> gymDetails = new ArrayList<>();
@@ -49,10 +51,10 @@ public class CustomerDAOImpl implements CustomerDAO {
             stmt.setInt(1, gymId);
             ResultSet output = stmt.executeQuery();
             if(!output.next()) {
-                System.out.println("No Slot Found");
+                System.out.println(ANSI_RED + "No Slot Found" + ANSI_RESET);
 
             }
-            System.out.println("SlotId \t SlotTime \t GymId");
+            System.out.println(ANSI_BLUE + "SlotId \t SlotTime \t GymId" + ANSI_RESET);
             do {
                 System.out.printf("%-7s\t", output.getString(3) );
                 System.out.printf("  %-9s\t", output.getString(5) );

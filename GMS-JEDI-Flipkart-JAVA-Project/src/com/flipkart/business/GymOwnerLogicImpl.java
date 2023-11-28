@@ -11,6 +11,9 @@ import com.flipkart.exceptions.IncorrectDataException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.flipkart.utils.ColorConstants.ANSI_BLUE;
+import static com.flipkart.utils.ColorConstants.ANSI_RESET;
+
 /**
  * This class implements the GymOwnerLogicInterface and provides the functionality for GYmOwner operations in the Gym Management System.
  */
@@ -80,7 +83,7 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 		}
 		System.out.println();
 		System.out.println("-------------------------------------");
-		System.out.printf("%5s %10s %8s %10s", "CenterId","Location", "Name", "Approved");
+		System.out.printf(ANSI_BLUE + "%5s %10s %8s %10s", "CenterId","Location", "Name", "Approved" + ANSI_RESET);
 		System.out.println();
 		return gymList;
 	}

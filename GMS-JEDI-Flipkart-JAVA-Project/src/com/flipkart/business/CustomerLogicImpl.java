@@ -8,6 +8,9 @@ import com.flipkart.exceptions.SlotNotFoundException;
 
 import java.util.List;
 
+import static com.flipkart.utils.ColorConstants.ANSI_RED;
+import static com.flipkart.utils.ColorConstants.ANSI_RESET;
+
 /**
  * This class implements the CustomerLogicInterface and provides the functionality for customer operations in the Gym Management System.
  */
@@ -48,7 +51,7 @@ public class CustomerLogicImpl implements CustomerLogic {
 			customerDaoImpl.fetchSlotList(gymId);
 			return true;
 		} catch  (Exception e){
-			System.out.println("No Slot Found");
+			System.out.println(ANSI_RED + "No Slot Found" + ANSI_RESET);
 		}
 		return false;
 	}

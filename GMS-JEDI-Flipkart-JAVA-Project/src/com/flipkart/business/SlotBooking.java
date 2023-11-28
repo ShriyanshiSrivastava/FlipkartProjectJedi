@@ -2,6 +2,8 @@
 package com.flipkart.business;
 import com.flipkart.bean.Slot;
 
+import static com.flipkart.utils.ColorConstants.*;
+
 
 public class SlotBooking {
 
@@ -11,17 +13,17 @@ public class SlotBooking {
     }
 
     public boolean isWaiting() {
-        System.out.println("Slots Booked, redirecting to Waiting list");
+        System.out.println(ANSI_GREEN + "Slots Booked, redirecting to Waiting list" + ANSI_RESET);
         return true;
     }
 
     public boolean bookSlot(Slot slot, String date,int userId) {
-        System.out.println("Slot booked Successfully");
+        System.out.println(ANSI_GREEN + "Slot booked Successfully" + ANSI_RESET);
         return true;
     }
 
     public boolean cancelSlot(Slot slot, String date,int userId) {
-        System.out.println("Slot cancelled Successfully");
+        System.out.println(ANSI_RED + "Slot cancelled Successfully" + ANSI_RESET);
         return true;
     }
 }
