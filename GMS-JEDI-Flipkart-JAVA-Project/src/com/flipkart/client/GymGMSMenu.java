@@ -28,7 +28,7 @@ public class GymGMSMenu {
     public void registerGymOwner(Scanner sc, String email){
         gymOwner.setEmail(email);
 
-        System.out.println("Enter your name: ");
+        System.out.println(ANSI_BLUE + "Enter your name: ");
         gymOwner.setName(sc.next());
 
 
@@ -39,7 +39,7 @@ public class GymGMSMenu {
         System.out.println("Enter your GST number: ");
         gymOwner.setGstNumber(sc.next());
 
-        System.out.println("Enter your password: ");
+        System.out.println("Enter your password: " + ANSI_RESET);
         String password = sc.next();
 
         User user = new User(gymOwner.getEmail(), password, 2);
@@ -56,7 +56,6 @@ public class GymGMSMenu {
     }
 
     public void registerGym(Scanner in) {
-        //gymOwnerBusiness.addGym(gymCenter);
         GymCentre gymDetails = new GymCentre();
         System.out.println("Add gym Details:-");
         System.out.print("Add gymnasium name: ");
@@ -65,13 +64,9 @@ public class GymGMSMenu {
         gymDetails.setNumItem(in.nextInt());
         System.out.print("Enter gymnasium address: ");
         gymDetails.setAddress(in.next());
-//        System.out.print("Add gymnasium area in square foot: ");
-//        gymDetails.s(in.nextDouble());
         System.out.println("Enter the number of seats per slot: ");
         gymDetails.setNoOfSeats(in.nextInt());
-//		System.out.println(gymOwner.getOwnerId());
         gymDetails.setGymOwnerEmail(gymOwner.getEmail());
-//		System.out.println(gymDetails);
 
         gymOwnerBusiness.addGym(gymDetails);
 
@@ -88,28 +83,26 @@ public class GymGMSMenu {
             throw new RuntimeException(e.getMessage());
         }
         for(GymCentre gym : allGyms) {
-            System.out.printf("%-8s\t", gym.getGymId());
-            System.out.printf("%-8s\t", gym.getAddress());
-            //System.out.printf("%-8s\t", gym.getNoOfSeat());
-            System.out.printf("%-8s\t", gym.getName());
+            System.out.printf("%-16s", gym.getGymId());
+            System.out.printf("%-16s", gym.getAddress());
+            System.out.printf("%-16s", gym.getName());
 
             if(gym.isApproved())
             {
-                System.out.printf("%-8s\t",ANSI_GREEN + "Yes" + ANSI_RESET);
+                System.out.printf(ANSI_GREEN + "%-16s", "Yes" + ANSI_RESET);
             }
             else
             {
-                System.out.printf("%-8s\t",ANSI_RED + "No" + ANSI_RESET);
+                System.out.printf(ANSI_RED + "%-16s", "No" + ANSI_RESET);
             }
             System.out.println("");
         }
-        System.out.println(ANSI_YELLOW + "-------------------------------------" + ANSI_RESET);
     }
 
     public void addSlots(Scanner in, String email) throws Exception {
 
         getAllGymDetails(in);
-        System.out.println("Enter the gym id for which you want to add slots: ");
+        System.out.println(ANSI_BLUE + "Enter the gym id for which you want to add slots: " + ANSI_RESET);
         int gymId = in.nextInt();
         boolean check = gymOwnerDAO.checkGymApproval(gymId);
         if(check == false)
@@ -118,58 +111,36 @@ public class GymGMSMenu {
             gymOwnerPage(in, email);
             return;
         }
-//            System.out.println("Select which slots you want to add in space separated numbers: \n");
             List<Slot> slotInfo = gymOwnerBusiness.viewAllSlots();
             for(Slot slot: slotInfo) {
                 System.out.println(slot.getSlotId() + " " + slot.getTime());
             }
-        System.out.println("Enter time: ");
+        System.out.println(ANSI_BLUE + "Enter time: ");
 
             String chosenSlots = in.next();
-        System.out.println("Enter date: ");
+        System.out.println("Enter date: " + ANSI_RESET);
             String time=in.next();
             gymOwnerBusiness.addSlots(gymId, time, chosenSlots);
             gymOwnerPage(in, email);
-
-
-//        getAllGymDetails(in);
-//        System.out.println("Enter the gymCenter id for which you want to add slots: ");
-//        gymCenter.setGymId(in.nextInt());
-//        if(!gymOwnerBusiness.isApproved(email)){
-//            System.out.println("This Gym is not Authorized");
-////			System.out.println("This Gym is not Authorized");
-//            gymOwnerPage(in, email);
-//        }
-//        else {
-//            viewAllSlots();
-//            System.out.println("Add slot timing: ");
-//
-//            Slot slot = new Slot();
-//            slot.setTime(in.next());
-//            System.out.println("Add slot Id: ");
-//            slot.setSlotId(in.nextInt());
-//            gymOwnerBusiness.addSlots(gymCenter.getGymId(), slot.getTime());
-//            gymOwnerBusiness.addSlots(gymCenter.getGymId(), slot.getTime());
-//            gymOwnerPage(in, email);
-//        }
     }
 
     private void viewSlots(int gymCentreId) {
         List<Slot> slots = gymOwnerBusiness.viewAllSlots();
         System.out.println();
-        System.out.println("**********************************");
-        System.out.println("Date \t\t Time ");
+        System.out.println("--------------------------");
+        System.out.printf(ANSI_BLUE + "%-16s %-16s %n", "Date", "Time" + ANSI_RESET);
+        System.out.println("--------------------------");
         for (Slot slot : slots) {
-            System.out.printf("%-8s\t", slot.getDate());
-            System.out.printf("%-8s\t", slot.getTime());
+            System.out.printf(ANSI_BLUE + "%-17s", slot.getDate());
+            System.out.printf("%-16s", slot.getTime() + ANSI_RESET);
             System.out.println("");
         }
-        System.out.println("**********************************");
+        System.out.println("--------------------------");
     }
 
     public void gymOwnerPage(Scanner sc,String gymOwnerEmail) throws Exception {
         if (!gymOwnerBusiness.isApproved(gymOwnerEmail)) {
-            System.out.println("You are not a Authorized Gym Owner");
+            System.out.println(ANSI_RED + "You are not a Authorized Gym Owner" + ANSI_RESET);
             ApplicationClient.mainPage();
         } else {
             gymOwner.setEmail(gymOwnerEmail);

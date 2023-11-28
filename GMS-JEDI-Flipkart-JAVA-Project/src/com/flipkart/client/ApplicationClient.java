@@ -62,21 +62,19 @@ public class ApplicationClient {
 	    String role = sc.next();
 	    if(role.equalsIgnoreCase("Admin"))
 	    {
-
 	          System.out.println(ANSI_BLUE + "Welcome to Admin Menu" + ANSI_RESET);
 	          AdminGMSMenu admin=new AdminGMSMenu();
 			  admin.AdminPage(sc);
-
 	    }
 	    else if(role.equalsIgnoreCase("Customer"))
 	    {
 	       System.out.println(ANSI_BLUE + "Welcome to Customer Menu" + ANSI_RESET);
 			CustomerGMSMenu customer=new CustomerGMSMenu();
 			//while(true){
-				System.out.println("1. Register");
+				System.out.println(ANSI_YELLOW + "1. Register");
 				System.out.println("2. Login");
-				System.out.println("3. Exit");
-				System.out.print("Enter your choice: ");
+				System.out.println("3. Exit" + ANSI_RESET);
+				System.out.print(ANSI_BLUE + "Enter your choice: " + ANSI_RESET);
 				int choice = sc.nextInt();
 				switch (choice) {
 					case 1:
@@ -94,13 +92,13 @@ public class ApplicationClient {
 	    }
 	    else if(role.equalsIgnoreCase("GymOwner"))
 	    {
-			System.out.println("1. Register");
+			System.out.println(ANSI_YELLOW +"1. Register");
 			System.out.println("2. Login");
-			System.out.println("3. Exit");
-			System.out.print("Enter your choice: ");
+			System.out.println("3. Exit" + ANSI_RESET);
+			System.out.print(ANSI_BLUE + "Enter your choice: " + ANSI_RESET);
 			int choice = sc.nextInt();
 			GymGMSMenu gymOwner=new GymGMSMenu();
-			System.out.println("Enter your email: ");
+			System.out.println(ANSI_BLUE + "Enter your email: " + ANSI_RESET);
 			String email = sc.next();
 			switch (choice) {
 				case 1:
@@ -116,9 +114,6 @@ public class ApplicationClient {
 				default:
 					System.out.println(ANSI_RED + "Incorrect choice" + ANSI_RESET);
 			}
-//
-//			gymOwner.testingGymOwnerMenu();
-//			gymOwner.ViewAllDetails();
 	    }
 	    // TODO Auto-generated method stub
 	    

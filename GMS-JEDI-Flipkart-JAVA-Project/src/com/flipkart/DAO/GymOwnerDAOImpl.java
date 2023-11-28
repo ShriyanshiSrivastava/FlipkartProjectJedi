@@ -13,6 +13,8 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.utils.SQLConstants;
 
+import static com.flipkart.utils.ColorConstants.*;
+
 public class GymOwnerDAOImpl implements GymOwnerDAO {
     static Connection conn = null;
     static PreparedStatement stmt = null;
@@ -22,7 +24,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
-            System.out.println("Fetching gym...");
+            System.out.println(ANSI_GREEN + "Fetching gym..." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYMOWNER_DETAILS_QUERY);
             stmt.setString(1, gymOwnerId);
@@ -49,7 +51,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
         List<Slot> allSlot = new ArrayList<Slot>();
         try {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
-            System.out.println("Fetching all slots...");
+            System.out.println(ANSI_GREEN + "Fetching all slots..." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_SLOTS);
 
@@ -171,7 +173,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
             ResultSet rs = stmt.executeQuery();
             System.out.println();
-            System.out.println("Gym Owner Email : " + gymOwnerEmail);
+            System.out.println(ANSI_BLUE+ "Gym Owner Email : " + gymOwnerEmail + ANSI_RESET);
             while (rs.next()) {
                 GymCentre gym = new GymCentre();
                 gym.setGymId(rs.getInt("gymId"));
@@ -197,9 +199,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_GYM_DETAILS_QUERY);
 
-            // Hard coded d
-            // Bind values into the parameters.
-            stmt.setInt(1, gymDetails.getGymId());  // This would set age
+            stmt.setInt(1, gymDetails.getGymId());
             stmt.setString(6, gymDetails.getGymOwnerEmail());
             stmt.setString(3, gymDetails.getName());
             stmt.setString(4, gymDetails.getAddress());

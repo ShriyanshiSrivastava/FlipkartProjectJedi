@@ -8,6 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.flipkart.utils.ColorConstants.ANSI_GREEN;
+import static com.flipkart.utils.ColorConstants.ANSI_RESET;
+
 public class AdminDAOImpl implements AdminDAO {
 
     Connection conn = null;
@@ -18,7 +21,7 @@ public class AdminDAOImpl implements AdminDAO {
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
-            System.out.println("Fetching gyms..");
+            System.out.println(ANSI_GREEN + "Fetching gyms.." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYMS);
 
@@ -80,7 +83,7 @@ public class AdminDAOImpl implements AdminDAO {
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
-            System.out.println("Fetching pending gym owners..");
+            System.out.println(ANSI_GREEN + "Fetching pending gym owners.." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_NOT_APPROVED_GYMOWNERS);
 
@@ -112,7 +115,7 @@ public class AdminDAOImpl implements AdminDAO {
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
-            System.out.println("Fetching gyms..");
+            System.out.println(ANSI_GREEN + "Fetching gyms.." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_NOT_APPROVED_GYMS);
 
@@ -147,7 +150,7 @@ public class AdminDAOImpl implements AdminDAO {
             stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_OWNER_BY_ID);
             stmt.setString(1, email);
             stmt.executeUpdate();
-            System.out.println("The gym owner has been approved!");
+            System.out.println(ANSI_GREEN + "The gym owner has been approved!" + ANSI_GREEN);
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -160,12 +163,12 @@ public class AdminDAOImpl implements AdminDAO {
         // TODO Auto-generated method stub
         try {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
-            System.out.println("Fetching gyms..");
+            System.out.println(ANSI_GREEN + "Fetching gyms.." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_BY_ID);
             stmt.setInt(1, gymId);
             stmt.executeUpdate();
-            System.out.println("The gym has been approved!");
+            System.out.println(ANSI_GREEN + "The gym has been approved!" + ANSI_RESET);
 
         } catch (SQLException se) {
             se.printStackTrace();

@@ -54,14 +54,16 @@ public class CustomerDAOImpl implements CustomerDAO {
                 System.out.println(ANSI_RED + "No Slot Found" + ANSI_RESET);
 
             }
-            System.out.println(ANSI_BLUE + "SlotId \t SlotTime \t GymId" + ANSI_RESET);
+            System.out.println( "-----------------------------------------" + ANSI_RESET);
+            System.out.printf(ANSI_BLUE + "%-16s %-16s %-16s %n", "Slot Id", "Slot Time", "Gym Id" + ANSI_RESET);
+            System.out.println( "-----------------------------------------" + ANSI_RESET);
             do {
-                System.out.printf("%-7s\t", output.getString(3) );
-                System.out.printf("  %-9s\t", output.getString(5) );
-                System.out.printf("  %-9s\t", output.getString(1) );
+                System.out.printf(ANSI_YELLOW + "%-16s", output.getString(3) );
+                System.out.printf("  %-16s", output.getString(5) );
+                System.out.printf("  %-16s", output.getString(1) + ANSI_RESET);
                 System.out.println("");
             }while(output.next());
-            System.out.println("*********************************************");
+            System.out.println( "-----------------------------------------" + ANSI_RESET);
         } catch(SQLException sqlExcep) {
             System.out.println(sqlExcep);
         }
@@ -130,14 +132,16 @@ public class CustomerDAOImpl implements CustomerDAO {
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOKED_SLOT_QUERY);
             stmt.setString(1, email);
             ResultSet output = stmt.executeQuery();
-            System.out.println("BookingId \t Date \t    GymId");
+            System.out.println( "-----------------------------------------" + ANSI_RESET);
+            System.out.printf(ANSI_BLUE + "%-16s %-16s %-16s %n", "Booking Id", "Date", "Gym Id" + ANSI_RESET);
+            System.out.println( "-----------------------------------------" + ANSI_RESET);
             while(output.next()) {
-                System.out.printf("%-12s\t", output.getInt(5) );
-                System.out.printf("  %-7s\t",output.getString(4));
-                System.out.printf("%-8s\t", output.getString(2) );
+                System.out.printf(ANSI_YELLOW + "%-16s", output.getInt(5) );
+                System.out.printf("  %-16s",output.getString(4));
+                System.out.printf("%-16s", output.getString(2) + ANSI_RESET);
                 System.out.println("");
             }
-            System.out.println("*********************************************");
+            System.out.println( "-----------------------------------------" + ANSI_RESET);
         } catch(SQLException sqlExcep) {
             System.out.println(sqlExcep);
         } catch(Exception excep) {
@@ -199,7 +203,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_SLOT_QUERY);
             System.out.println(slotId);
-            System.out.println(gymId);
+//            System.out.println(gymId);
             stmt.setString(1, slotId);
             stmt.setInt(2, gymId);
             ResultSet output = stmt.executeQuery();
@@ -224,7 +228,6 @@ public class CustomerDAOImpl implements CustomerDAO {
             stmt = conn.prepareStatement(SQLConstants.SQL_CANCEL_BOOKING);
             stmt.setInt(1, bookingId);
             stmt.executeUpdate();
-            System.out.println("YEYE");
         } catch(SQLException sqlExcep) {
             System.out.println(sqlExcep);
         } catch(Exception excep) {

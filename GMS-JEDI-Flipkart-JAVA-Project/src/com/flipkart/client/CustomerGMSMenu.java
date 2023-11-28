@@ -9,8 +9,7 @@ import com.flipkart.business.UserLogicImpl;
 import com.flipkart.exceptions.GymCentreNotFoundException;
 import com.flipkart.exceptions.SlotNotFoundException;
 
-import static com.flipkart.utils.ColorConstants.ANSI_RED;
-import static com.flipkart.utils.ColorConstants.ANSI_RESET;
+import static com.flipkart.utils.ColorConstants.*;
 
 
 public class CustomerGMSMenu {
@@ -18,51 +17,44 @@ public class CustomerGMSMenu {
     CustomerLogicImpl customerGMSService = new CustomerLogicImpl();
 
     public void CustomerRegistration(Scanner in) throws Exception {
-        System.out.println("Enter your name: ");
+        System.out.println(ANSI_YELLOW + "Enter your name: ");
         String name = in.next();
         customer.setName(name);
-        //System.out.println("Enter your mobile: ");
-//        customer.setMobile(in.next());
         System.out.println("Enter your email: ");
         String email = in.next();
         customer.setEmail(email);
         System.out.println("Enter your address: ");
         String address = in.next();
         customer.setAddress(address);
-//        System.out.println(address);
-//        System.out.println("Enter your dob: ");
-//        customer.setDob(in.next());
-        System.out.println("Enter your password: ");
+        System.out.println("Enter your password: " + ANSI_RESET);
         String password = in.next();
         customer.setPassword(password);
-//        System.out.println(password);
 
         User user = new User(customer.getEmail(),password,1);
         UserLogicImpl userService = new UserLogicImpl();
         userService.registerUser(user);
         userService.registerCustomer(customer);
-//     CustomerActionPage(in, customer.getEmail());
         CustomerActionPage(in,email);
     }
 
     public void viewCatalog(Scanner in, String email) throws Exception {
-        System.out.println("Welcome to FlipFit Gym Application");
-        System.out.println("Menu:-");
+        System.out.println(ANSI_GREEN + "Welcome to FlipFit Gym Application" + ANSI_RESET);
+        System.out.println(ANSI_BLUE + "Menu:-" + ANSI_RESET);
         fetchGymList();
 
-        System.out.print("Choose Gym ID: ");
+        System.out.print(ANSI_BLUE + "Choose Gym ID: " + ANSI_RESET);
         int gymId = in.nextInt();
         boolean check = customerGMSService.checkGymApprove(gymId);
 
         if(!check)
         {
-            System.out.println("This gym has not been approved yet!");
+            System.out.println(ANSI_RED + "This gym has not been approved yet!" + ANSI_RESET);
             CustomerActionPage(in,email);
             return;
         }
         boolean slotsAvailable = customerGMSService.fetchAvilableSlots(gymId);
         if(slotsAvailable) {
-            System.out.print("Enter Slot ID for which you want to make booking: ");
+            System.out.print(ANSI_BLUE + "Enter Slot ID for which you want to make booking: " + ANSI_RESET);
             String slotId = in.next();
 
             boolean flag =customerGMSService.checkSlotExists(slotId, gymId);
@@ -73,12 +65,13 @@ public class CustomerGMSMenu {
                 return;
             }
 
-            System.out.print("Enter your Date: ");
+            System.out.print(ANSI_BLUE + "Enter your Date: " + ANSI_RESET);
             String date = in.next();
             int response=0;
             try{
                response = customerGMSService.bookSlots(gymId, slotId, email, date);
             } catch (SlotNotFoundException exception){
+                 System.out.println("Cheeku");
                 System.out.println(exception.getMessage());
             }
             switch (response) {
@@ -87,12 +80,11 @@ public class CustomerGMSMenu {
 
                     break;
                 case 1:
-                    System.out.println("There are no more slots left");
+                    System.out.println(ANSI_RED + "There are no more slots left" + ANSI_RESET);
                     break;
                 case 2:
-                    System.out.println("Congratulations your slot is booked");
+                    System.out.println(ANSI_GREEN + "Congratulations your slot is booked" + ANSI_RESET);
                     break;
-                // Default case statement
                 default:
                     System.out.println("Incorrect choice!!! Please try again!!!");
             }
@@ -111,17 +103,18 @@ public class CustomerGMSMenu {
             System.out.println(exception.getMessage());
         }
         System.out.println();
-        System.out.println("*****************************************");
-        System.out.printf("%-16s %-16s %-16s %n", "Gym Id", "GymOwner", "GymName");
+        System.out.println( "-----------------------------------------" + ANSI_RESET);
+        System.out.printf(ANSI_BLUE + "%-14s %-16s %-16s %n", "Gym Id", "GymOwner", "GymName" + ANSI_RESET);
+        System.out.println("-----------------------------------------" + ANSI_RESET);
         if(gymDetails==null) throw new NullPointerException();
         for(GymCentre gym: gymDetails) {
 
-            System.out.printf("%-16s\t", gym.getGymId() );
-            System.out.printf("%-16s\t",gym.getGymOwnerEmail());
-            System.out.printf("%-16s\t", gym.getName() );
+            System.out.printf(ANSI_YELLOW + "%-16s", gym.getGymId() );
+            System.out.printf("%-16s",gym.getGymOwnerEmail());
+            System.out.printf("%-20s", gym.getName() + ANSI_RESET);
             System.out.println("");
         }
-        System.out.println("****************************************");
+        System.out.println("-----------------------------------------" + ANSI_RESET);
     }
 
     private void cancelBookedSlots(Scanner in, String email) {
@@ -136,11 +129,10 @@ public class CustomerGMSMenu {
         int choice = 0;
 
         while(choice != 4) {
-//        System.out.println("Welcome to FlipFit Gym Application");
 
-            System.out.println("Menu:-");
-            System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println(ANSI_BLUE + "Menu:-" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW +"1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Exit" + ANSI_RESET);
+            System.out.print(ANSI_BLUE + "Enter your choice: " + ANSI_RESET);
             choice = in.nextInt();
 
             switch (choice) {
@@ -157,7 +149,7 @@ public class CustomerGMSMenu {
                     ApplicationClient.mainPage();
                     break;
                 default:
-                    System.out.println("Incorrect choice!!! Please try again!!!");
+                    System.out.println(ANSI_RED + "Incorrect choice!!! Please try again!!!" + ANSI_RESET);
             }
         }
 

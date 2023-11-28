@@ -35,7 +35,7 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 	 @return The list of Slots objects representing the possible slots
 	 */
 	public List<Slot> viewAllSlots(){
-		System.out.println("Listing all Slots in GymCenter");
+		System.out.println(ANSI_BLUE + "Listing all Slots in GymCenter" + ANSI_RESET);
 		return gymOwnerDAO.viewAllSlots();
 	}
 
@@ -71,7 +71,7 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 	@throws IncorrectDataException if no gym data is found
  */
 	public List<GymCentre> viewAllGymCenters(String gymOwnerEmail) throws GymOwnerNotFoundException, IncorrectDataException {
-		System.out.println("Listing all Gym Centres");
+		System.out.println(ANSI_BLUE + "Listing all Gym Centres" + ANSI_RESET);
 		List<GymCentre> gymList = new ArrayList<GymCentre>();
 		if (gymOwnerEmail == null) {
 			throw new GymOwnerNotFoundException();
@@ -82,9 +82,11 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 			throw new IncorrectDataException();
 		}
 		System.out.println();
-		System.out.println("-------------------------------------");
-		System.out.printf(ANSI_BLUE + "%5s %10s %8s %10s", "CenterId","Location", "Name", "Approved" + ANSI_RESET);
+		System.out.println("------------------------------------------------------------");
+		System.out.printf(ANSI_BLUE + "%-14s %-16s %-14s %-12s", "CenterId","Location", "Name", "Approved" + ANSI_RESET);
+
 		System.out.println();
+		System.out.println("------------------------------------------------------------");
 		return gymList;
 	}
 	public void createSlot(Slot slot){
