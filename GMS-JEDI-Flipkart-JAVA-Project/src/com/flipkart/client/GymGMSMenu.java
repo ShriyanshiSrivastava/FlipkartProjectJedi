@@ -118,13 +118,17 @@ public class GymGMSMenu {
             gymOwnerPage(in, email);
             return;
         }
-            System.out.println("Select which slots you want to add in space separated numbers: \n");
+//            System.out.println("Select which slots you want to add in space separated numbers: \n");
             List<Slot> slotInfo = gymOwnerBusiness.viewAllSlots();
             for(Slot slot: slotInfo) {
                 System.out.println(slot.getSlotId() + " " + slot.getTime());
             }
+        System.out.println("Enter time: ");
+
             String chosenSlots = in.next();
-            gymOwnerBusiness.addSlots(gymId,chosenSlots);
+        System.out.println("Enter date: ");
+            String time=in.next();
+            gymOwnerBusiness.addSlots(gymId, time, chosenSlots);
             gymOwnerPage(in, email);
 
 
@@ -154,9 +158,9 @@ public class GymGMSMenu {
         List<Slot> slots = gymOwnerBusiness.viewAllSlots();
         System.out.println();
         System.out.println("**********************************");
-        System.out.println("Time ");
+        System.out.println("Date \t\t Time ");
         for (Slot slot : slots) {
-
+            System.out.printf("%-8s\t", slot.getDate());
             System.out.printf("%-8s\t", slot.getTime());
             System.out.println("");
         }

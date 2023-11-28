@@ -11,7 +11,7 @@ public interface GymOwnerLogic {
     List<Slot> viewAllSlots();
     boolean checkIfAlreadyBooked(int gymId);
     boolean isApproved(String gymOwnerEmail);
-    void addSlots(int gymCenterId,String date);
+    void addSlots(int gymCenterId, String time, String date);
     List<GymCentre> viewAllGymCenters(String gymOwnerEmail) throws GymOwnerNotFoundException, IncorrectDataException;
     void createSlot(Slot slot);
     boolean checkGymApproval(int gymId);

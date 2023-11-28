@@ -2,12 +2,12 @@ package com.flipkart.bean;
 
 public class Slot {
 	private String gymId;
-	private static int slotId;
+	private int slotId;
 	private int customerId;
 	private String date;
 	private String time;
 
-	public static int getSlotId()
+	public int getSlotId()
 	{
 		return slotId;
 	}

@@ -113,11 +113,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
     }
 
 
-    public void addSlots(int gymId, String time) {
+    public void addSlots(int gymId, String date, String time) {
         int slotCapacity = findCapacity(gymId);
         int custId=0;
         int slotId=0;
-        String date=time;
         try{
 
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");

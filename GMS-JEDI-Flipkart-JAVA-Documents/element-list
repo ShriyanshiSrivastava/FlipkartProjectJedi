@@ -1,0 +1,7 @@
+module:GMS_JEDI_2_Flipkart_Java_Project
+com.flipkart.bean
+com.flipkart.business
+com.flipkart.client
+com.flipkart.DAO
+com.flipkart.exceptions
+com.flipkart.utils

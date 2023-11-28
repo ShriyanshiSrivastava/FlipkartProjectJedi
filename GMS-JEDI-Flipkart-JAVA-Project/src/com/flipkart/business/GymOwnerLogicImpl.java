@@ -59,8 +59,8 @@ public class GymOwnerLogicImpl implements GymOwnerLogic {
 	 @param gymCenterId The ID of the gym
 	 @param date The date for the gym
 	 */
-	public void addSlots(int gymCenterId,String date) {
-		gymOwnerDAO.addSlots(gymCenterId, date);
+	public void addSlots(int gymCenterId, String date, String time) {
+		gymOwnerDAO.addSlots(gymCenterId, date, time);
 		return;
 	}
 /**

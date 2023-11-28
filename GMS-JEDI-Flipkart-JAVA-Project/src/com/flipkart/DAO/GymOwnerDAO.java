@@ -11,7 +11,7 @@ public interface GymOwnerDAO {
     List<Slot> viewAllSlots();
     int findCapacity(int gymId);
     boolean checkIfAlreadyBooked(int gymId);
-    void addSlots(int gymId, String time);
+    void addSlots(int gymId, String time, String date);
     void createSlot(Slot slot);
     List<GymCentre> viewAllGymCenters(String gymOwnerEmail);
     void addGym(GymCentre gymDetails);
