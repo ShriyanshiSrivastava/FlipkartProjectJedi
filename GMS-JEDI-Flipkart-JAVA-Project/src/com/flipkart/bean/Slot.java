@@ -5,7 +5,7 @@ public class Slot {
 	private static int slotId;
 	private int customerId;
 	private String date;
-	private static String time;
+	private String time;
 
 	public static int getSlotId()
 	{
@@ -36,7 +36,7 @@ public class Slot {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public static String getTime() {
+	public String getTime() {
 		return time;
 	}
 	public void setTime(String time) {

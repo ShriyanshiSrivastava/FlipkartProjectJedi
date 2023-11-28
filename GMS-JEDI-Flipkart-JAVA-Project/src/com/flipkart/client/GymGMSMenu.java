@@ -10,6 +10,7 @@ import com.flipkart.business.UserLogicImpl;
 import com.flipkart.exceptions.GymOwnerNotFoundException;
 import com.flipkart.exceptions.IncorrectDataException;
 import com.flipkart.exceptions.UserNotFoundException;
+import static com.flipkart.utils.ColorConstants.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -94,15 +95,15 @@ public class GymGMSMenu {
 
             if(gym.isApproved())
             {
-                System.out.printf("%-8s\t", "Yes");
+                System.out.printf("%-8s\t",ANSI_GREEN + "Yes" + ANSI_RESET);
             }
             else
             {
-                System.out.printf("%-8s\t", "No");
+                System.out.printf("%-8s\t",ANSI_RED + "No" + ANSI_RESET);
             }
             System.out.println("");
         }
-        System.out.println("-------------------------------------");
+        System.out.println(ANSI_YELLOW + "-------------------------------------" + ANSI_RESET);
     }
 
     public void addSlots(Scanner in, String email) throws Exception {
@@ -155,6 +156,7 @@ public class GymGMSMenu {
         System.out.println("**********************************");
         System.out.println("Time ");
         for (Slot slot : slots) {
+
             System.out.printf("%-8s\t", slot.getTime());
             System.out.println("");
         }
@@ -168,12 +170,12 @@ public class GymGMSMenu {
         } else {
             gymOwner.setEmail(gymOwnerEmail);
             while (true) {
-                System.out.println("1. Add Gyms");
-                System.out.println("2. View Gyms");
-                System.out.println("3. Add Slots");
-                System.out.println("4. View Slots");
-                System.out.println("5. Exit");
-                System.out.print("Enter your choice: ");
+                System.out.println(ANSI_YELLOW + "1. Add Gyms" + ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "2. View Gyms" + ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "3. Add Slots"+ ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "4. View Slots"+ ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "5. Exit"+ ANSI_RESET);
+                System.out.print(ANSI_BLUE + "Enter your choice: "+ ANSI_RESET);
                 int choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -186,7 +188,7 @@ public class GymGMSMenu {
                         addSlots(sc, gymOwnerEmail);
                         break;
                     case 4:
-                        System.out.println("Enter the gymId for which you want to view the slots");
+                        System.out.println(ANSI_BLUE + "Enter the gymId for which you want to view the slots"+ ANSI_RESET);
                         int id = sc.nextInt();
                         viewSlots(id);
                         break;
@@ -194,7 +196,7 @@ public class GymGMSMenu {
                         ApplicationClient.mainPage();
                         break;
                     default:
-                        System.out.println("incorrect choice");
+                        System.out.println(ANSI_RED + "incorrect choice" + ANSI_RESET);
                 }
             }
 

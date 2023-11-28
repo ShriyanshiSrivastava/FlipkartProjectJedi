@@ -21,7 +21,6 @@ public class ApplicationClient {
 		Scanner in = new Scanner(System.in);
 		System.out.println(ANSI_BLUE + "Enter your username: " + ANSI_RESET);
 		String username = in.next();
-		System.out.println(username+" ->"+username);
 		System.out.println(ANSI_BLUE + "Enter your correct password: " + ANSI_RESET);
 		String password = in.next();
 
@@ -29,8 +28,8 @@ public class ApplicationClient {
 		UserLogicImpl authentication = new UserLogicImpl();
 		LocalDateTime localDateTime = LocalDateTime.now();
 		if(authentication.authenticateUser(user) != null) {
-			System.out.println("Welcome " + username + "! You are logged in.");
-			System.out.println("Current Date and Time: "+ localDateTime);
+			System.out.println(ANSI_BLUE + "Welcome " + username + "! You are logged in." + ANSI_RESET);
+			System.out.println(ANSI_YELLOW + "Current Date and Time: "+ localDateTime + ANSI_RESET);
 			int role = user.getRoleId();
 			switch(role) {
 				case 1:
