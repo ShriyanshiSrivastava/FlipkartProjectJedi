@@ -20,7 +20,7 @@ public class UserDAOImpl implements UserDAO {
 
 
         try{
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
 
 
             stmt = conn.prepareStatement(SQLConstants.SQL_AUTH_QUERY);
@@ -47,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
     public void registerCustomer(Customer customerData) {
         // todo
         try{
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_CUSTOMER_DETAILS_QUERY);
             stmt.setString(1, customerData.getEmail());
@@ -68,7 +68,7 @@ public class UserDAOImpl implements UserDAO {
         // todo
         try{
 
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_GYMOWNER_DETAILS_QUERY);
             stmt.setString(1, ownerData.getEmail());
@@ -89,7 +89,7 @@ public class UserDAOImpl implements UserDAO {
 
     public void registerUser(User userData) {
         try{
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_USER_DETAILS_QUERY);
             stmt.setString(1, userData.getEmail());  // This would set age
             stmt.setString(2,userData.getPassword());

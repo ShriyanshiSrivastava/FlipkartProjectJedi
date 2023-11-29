@@ -23,7 +23,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
         GymOwner gymOwnerDetails = new GymOwner();
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println(ANSI_GREEN + "Fetching gym..." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYMOWNER_DETAILS_QUERY);
@@ -50,7 +50,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
     public List<Slot> viewAllSlots(){
         List<Slot> allSlot = new ArrayList<Slot>();
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println(ANSI_GREEN + "Fetching all slots..." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_SLOTS);
@@ -77,7 +77,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     public int findCapacity(int gymId) {
         try{
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FIND_CAPACITY);
             stmt.setInt(1, gymId);
@@ -98,7 +98,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     public boolean checkIfAlreadyBooked(int gymId) {
         try{
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_SLOT_FOR_GYM);
             stmt.setInt(1, gymId);
@@ -121,7 +121,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
         int slotId=0;
         try{
 
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_ALL_SLOTS);
             stmt.setString(1, String.valueOf(gymId));
             stmt.setInt(2, custId);
@@ -145,7 +145,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/flipfit_schema", "root", "secretpassword");
+                    .getConnection("jdbc:mysql://localhost:3306/GMSFlipFit", "root", "2001");
             statement = connection.prepareStatement(SQLConstants.CREATE_SLOT);
 
             statement.setInt(1,slot.getSlotId());
@@ -165,7 +165,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println("Fetching gym...");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_DETAILS_QUERY);
@@ -196,7 +196,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     public void addGym(GymCentre gymDetails) {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_GYM_DETAILS_QUERY);
 
             stmt.setInt(1, gymDetails.getGymId());
@@ -220,7 +220,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_OWNER_APPROVE);
             stmt.setString(1, email);
             ResultSet output = stmt.executeQuery();
@@ -239,7 +239,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_GYM_APPROVE);
             stmt.setInt(1, gymId);
             ResultSet output = stmt.executeQuery();

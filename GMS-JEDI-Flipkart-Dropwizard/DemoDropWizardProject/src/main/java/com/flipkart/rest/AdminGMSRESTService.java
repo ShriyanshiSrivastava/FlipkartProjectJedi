@@ -52,7 +52,7 @@ public class AdminGMSRESTService {
         }
     }
 
-    @Path("seependinggym")
+    @Path("viewPendingGymCentres")
     @GET
     @Produces("application/json")
     public static Response viewPendingGymRequests(){

@@ -12,42 +12,18 @@ import javax.ws.rs.core.Response;
 
 @Path("/v1/authentication")
 public class UserGMSRESTService {
-//    @Path("login")
-//    @POST
-//    @Produces("application/json")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public static Response login(User user){
-//        UserLogic authentication = new UserLogicImpl();
-//        User user1 =authentication.authenticateUser(user);
-//        if(user1 == null)
-//        {
-//            user1.setRoleId(5);
-//            user1.setEmail("Wrong");
-//            user1.setPassword("Wrong");
-//        }
-//        return Response.ok(user1).build();
-//    }
-
-    @Path("registeruser")
+    @Path("registerCustomer")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void registerUser(User user){
+    public void registerCustomer(Customer customer){
         UserLogic userGMSService = new UserLogicImpl();
+        User user =new User(customer.getEmail(), customer.getPassword(), 1);
         userGMSService.registerUser(user);
+        userGMSService.registerCustomer(customer);
+
     }
 
-//    @Path("registercustomer")
-//    @POST
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void registerCustomer(Customer customer){
-//        UserLogic userGMSService = new UserLogicImpl();
-//        User user =new User(customer.getEmail(), customer.getPassword(), 1);
-//        userGMSService.registerUser(user);
-//        userGMSService.registerCustomer(customer);
-//
-//    }
-
-    @Path("registergymowner")
+    @Path("registerGymOwner")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerGymOwner(GymOwner gymOwner){

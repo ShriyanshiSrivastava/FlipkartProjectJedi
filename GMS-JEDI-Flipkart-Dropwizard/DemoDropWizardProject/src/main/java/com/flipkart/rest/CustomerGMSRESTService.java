@@ -10,7 +10,7 @@ import com.flipkart.business.CustomerLogicImpl;
 
 @Path("/v1/customer")
 public class CustomerGMSRESTService {
-    @Path("allgyms")
+    @Path("viewAllGymCentres")
     @GET
     @Produces("application/json")
     public static Response fetchAllGyms(){
@@ -23,7 +23,7 @@ public class CustomerGMSRESTService {
         }
     }
 
-    @Path("allslots")
+    @Path("viewAllSlots")
     @GET
     @Produces("application/json")
     public static Response fetchAllSlots(@QueryParam("gymId") int gymId){
@@ -36,54 +36,19 @@ public class CustomerGMSRESTService {
         }
     }
 
-//    @Path("cancelbooking")
-//    @DELETE
-//    @Produces("application/json")
-//    public static Response cancelBooking(@QueryParam("bookingId") int bookingId){
-//
-//        CustomerLogic customerService = new CustomerLogicImpl();
-//        try{
-//            return Response.ok(customerService.cancelBookedSlots(bookingId)).build();
-//        }
-//        catch(Exception exception){
-//            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
-//        }
-//    }
-
-    @Path("createbooking")
+    @Path("bookNewSlot")
     @POST
     @Produces("application/json")
     public static Response createBooking(@QueryParam("gymId") int gymId, @QueryParam("slotId") String slotId, @QueryParam("email") String email, @QueryParam("date") String date){
         CustomerLogic customerGMSDao = new CustomerLogicImpl();
         try{
+            System.out.println(gymId);
+            System.out.println(slotId);
+            System.out.println(email);
+            System.out.println(date);
             return Response.ok(customerGMSDao.bookSlots(gymId,slotId,email,date)).build();
         }
         catch(Exception exception){
-            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
-        }
-    }
-
-//    @Path("mybookings")
-//    @GET
-//    @Produces("application/json")
-//    public static Response getBookings(@QueryParam("email") String email){
-//        CustomerLogic customerGMSDao = new CustomerLogicImpl();
-//        try{
-//            return Response.ok(customerGMSDao.fetchBookedSlots(email)).build();
-//        }
-//        catch(Exception exception){
-//            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
-//        }
-//    }
-
-    @Path("bookslots")
-    @POST
-    @Produces("application/json")
-    public static Response bookGymSlots(@QueryParam("gymId") int gymId, @QueryParam("slotId") String slotId, @QueryParam("email") String email, @QueryParam("date") String date) {
-        CustomerLogic customerGMSService = new CustomerLogicImpl();
-        try {
-            return Response.ok(customerGMSService.bookSlots(gymId, slotId, email, date)).build();
-        } catch (Exception exception) {
             return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
         }
     }

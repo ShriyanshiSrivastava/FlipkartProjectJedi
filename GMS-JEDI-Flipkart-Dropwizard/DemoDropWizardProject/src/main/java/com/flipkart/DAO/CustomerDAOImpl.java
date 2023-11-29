@@ -18,7 +18,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
         try {
 
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_APPROVED_GYMS);
 
             ResultSet rs = stmt.executeQuery();
@@ -46,7 +46,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_SLOT_QUERY);
             stmt.setInt(1, gymId);
             ResultSet output = stmt.executeQuery();
@@ -74,7 +74,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
 
 
             stmt = conn.prepareStatement(SQLConstants.SQL_BOOK_SLOT_QUERY);
@@ -99,7 +99,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_COUNT_CURRENT_CAPACITY_QUERY);
             stmt.setString(1, slotId);
@@ -128,7 +128,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOKED_SLOT_QUERY);
             stmt.setString(1, email);
             ResultSet output = stmt.executeQuery();
@@ -155,7 +155,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_CANCEL_BOOKED_SLOT_QUERY);
             stmt.setString(1, email);
             stmt.setString(2, slotId);
@@ -178,7 +178,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_ALREADY_BOOKED_SLOT_QUERY);
             stmt.setString(1, email);
             stmt.setString(2, slotId);
@@ -199,7 +199,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_SLOT_QUERY);
             System.out.println(slotId);
@@ -224,7 +224,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_CANCEL_BOOKING);
             stmt.setInt(1, bookingId);
             stmt.executeUpdate();
@@ -242,7 +242,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_GYM_APPROVE);
             stmt.setInt(1, gymId);
             ResultSet output = stmt.executeQuery();

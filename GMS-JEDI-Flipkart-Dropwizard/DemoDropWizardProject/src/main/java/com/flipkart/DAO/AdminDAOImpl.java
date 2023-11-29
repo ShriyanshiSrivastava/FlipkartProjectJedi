@@ -20,7 +20,7 @@ public class AdminDAOImpl implements AdminDAO {
         List<GymCentre> gymDetails = new ArrayList<>();
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println(ANSI_GREEN + "Fetching gyms.." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYMS);
@@ -51,7 +51,7 @@ public class AdminDAOImpl implements AdminDAO {
         List<GymOwner> gymOwnerDetails = new ArrayList<>();
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println("Fetching gym owners..");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYMOWNERS);
@@ -82,7 +82,7 @@ public class AdminDAOImpl implements AdminDAO {
         List<GymOwner> gymOwnerDetails = new ArrayList<>();
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println(ANSI_GREEN + "Fetching pending gym owners.." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_NOT_APPROVED_GYMOWNERS);
@@ -114,7 +114,7 @@ public class AdminDAOImpl implements AdminDAO {
         List<GymCentre> gymDetails = new ArrayList<GymCentre>();
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println(ANSI_GREEN + "Fetching gyms.." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_NOT_APPROVED_GYMS);
@@ -144,7 +144,7 @@ public class AdminDAOImpl implements AdminDAO {
     public void approveSingleOwnerRequest(String email) {
         // TODO Auto-generated method stub
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println("Fetching gyms owners..");
 
             stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_OWNER_BY_ID);
@@ -162,7 +162,7 @@ public class AdminDAOImpl implements AdminDAO {
     public void approveSingleGymRequest(int gymId) {
         // TODO Auto-generated method stub
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/flipfit_schema", "root", "secretpassword");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/GMSFlipFit", "root", "2001");
             System.out.println(ANSI_GREEN + "Fetching gyms.." + ANSI_RESET);
 
             stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_BY_ID);
